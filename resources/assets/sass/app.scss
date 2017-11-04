@@ -1,9 +1,11 @@
+// Font Awesome
+@import "node_modules/font-awesome/css/font-awesome.min";
 
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+// Buefy
+@import "node_modules/buefy/lib/buefy.min";
 
-// Variables
-@import "variables";
+// Bulmaswatch
+// @import "node_modules/bulmaswatch/cyborg/bulmaswatch.min";
 
-// Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+// Overrides
+@import "overrides";
