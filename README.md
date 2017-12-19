@@ -10,5 +10,7 @@ Chatty social network from Codecourse tutorial rebuilt from scratch as a single-
 - `composer install`
 - configure `.env` file based on `.env.example`,
 - configure database
+- configure Mailtrap
 - `php artisan key:generate`
+- `php artisan jwt:secret`
 - `php artisan migrate --seed`

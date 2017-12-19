@@ -18,6 +18,9 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
+            if ($request->ajax()) {
+                return response()->json(['message' => 'You are already signed in.'], 403);
+            }
             return redirect('/home');
         }
 

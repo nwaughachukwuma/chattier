@@ -4,6 +4,11 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class Handler extends ExceptionHandler
 {
@@ -48,6 +53,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($request->ajax()) {
+            $messages = [
+                UnauthorizedHttpException::class => 'jwt_refresh',
+                JWTException::class => 'jwt_absent',
+                TokenBlacklistedException::class => 'jwt_blacklisted',
+                TokenExpiredException::class => 'jwt_expired',
+                TokenInvalidException::class => 'jwt_invalid',
+            ];
+            if (array_key_exists($class = get_class($exception), $messages)) {
+                return response()->json(['message' => $messages[$class]], 401);
+            }
+        }
+
         return parent::render($request, $exception);
     }
 }
