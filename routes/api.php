@@ -17,3 +17,7 @@ Route::namespace('Auth')->group(function () {
     Route::get('/refresh', 'LoginController@refresh');
     Route::post('/register', 'RegisterController@register');
 });
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/search', 'SearchController@results');
+});

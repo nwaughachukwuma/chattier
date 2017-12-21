@@ -24,9 +24,19 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
+    protected $appends = [
+        'avatar',
+    ];
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function getAvatarAttribute()
+    {
+        $hash = md5($this->email);
+        return "https://www.gravatar.com/avatar/{$hash}?d=mm&s=64";
     }
 
     public function sendPasswordResetNotification($token)

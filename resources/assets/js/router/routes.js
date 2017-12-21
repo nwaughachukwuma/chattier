@@ -11,6 +11,7 @@ Route.group({ guard: guest }, () => {
 });
 
 Route.group({ guard: auth }, () => {
+    Route.view('/search', 'SearchResults');
     Route.view('/friends', 'Friends');
 });
 

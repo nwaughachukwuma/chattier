@@ -26,7 +26,9 @@
                 <div class="navbar-end">
                     <div v-if="$_auth.check" class="navbar-item has-dropdown is-hoverable">
                         <a href="#" class="navbar-link">
-                            <b-icon icon="user-circle-o"></b-icon>
+                            <figure class="image is-24x24 user-avatar">
+                                <img :src="$_auth.user.avatar" :alt="$_auth.user.username">
+                            </figure>
                             {{ $_auth.user | fullname }}
                         </a>
                         <div class="navbar-dropdown is-right">
@@ -83,7 +85,11 @@ export default {
 </script>
 
 <style scoped>
-.icon {
+.icon, .user-avatar {
     margin-right: 5px;
+}
+.user-avatar {
+    border-radius: 50%;
+    overflow: hidden;
 }
 </style>
