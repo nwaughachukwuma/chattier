@@ -4,7 +4,7 @@ import axios from 'axios';
 const request = [
     (config) => {
         if (window.store.has('auth.token')) {
-            config.headers.common['Authorization'] = 'Bearer ' + window.store.get('auth.token');
+            config.headers.common['Authorization'] = `Bearer ${window.store.get('auth.token')}`;
         }
         return config;
     },
@@ -29,7 +29,7 @@ const response = [
                 axios.get('/refresh')
                     .then(({ data: { token } }) => {
                         window.store.set('auth.token', token);
-                        res.config.headers['Authorization'] = 'Bearer ' + token;
+                        res.config.headers['Authorization'] = `Bearer ${token}`;
                         resolve(axios(res.config));
                     })
                     .catch((error) => {

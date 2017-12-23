@@ -32,7 +32,7 @@ export default {
     filters: { fullname },
     computed: {
         profile () {
-            return '/user/' + this.user.username;
+            return `/user/${this.user.username}`;
         }
     }
 };

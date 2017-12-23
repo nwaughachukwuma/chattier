@@ -18,6 +18,8 @@ Route::namespace('Auth')->group(function () {
     Route::post('/register', 'RegisterController@register');
 });
 
+Route::get('/profile/{username}', 'ProfileController@show');
+
 Route::middleware('auth:api')->group(function () {
     Route::get('/search', 'SearchController@results');
 });

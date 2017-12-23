@@ -25,12 +25,12 @@
                 </div><!-- .navbar-start -->
                 <div class="navbar-end">
                     <div v-if="$_auth.check" class="navbar-item has-dropdown is-hoverable">
-                        <a href="#" class="navbar-link">
+                        <router-link :to="profile" class="navbar-link">
                             <figure class="image is-24x24 user-avatar">
                                 <img :src="$_auth.user.avatar" :alt="$_auth.user.username">
                             </figure>
                             {{ $_auth.user | fullname }}
-                        </a>
+                        </router-link>
                         <div class="navbar-dropdown is-right">
                             <a href="#" class="navbar-item">
                                 <b-icon icon="edit"></b-icon>Update profile
@@ -65,6 +65,11 @@ export default {
         return {
             isActive: false
         };
+    },
+    computed: {
+        profile () {
+            return `/user/${this.$_auth.user.username}`;
+        }
     },
     methods: {
         onClickSignout () {

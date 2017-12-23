@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -54,15 +55,17 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($request->ajax()) {
-            $messages = [
-                UnauthorizedHttpException::class => 'jwt_refresh',
-                JWTException::class => 'jwt_absent',
-                TokenBlacklistedException::class => 'jwt_blacklisted',
-                TokenExpiredException::class => 'jwt_expired',
-                TokenInvalidException::class => 'jwt_invalid',
+            $responses = [
+                ModelNotFoundException::class => ['resource_not_found', 404],
+                UnauthorizedHttpException::class => ['jwt_refresh', 401],
+                JWTException::class => ['jwt_absent', 401],
+                TokenBlacklistedException::class => ['jwt_blacklisted', 401],
+                TokenExpiredException::class => ['jwt_expired', 401],
+                TokenInvalidException::class => ['jwt_invalid', 401],
             ];
-            if (array_key_exists($class = get_class($exception), $messages)) {
-                return response()->json(['message' => $messages[$class]], 401);
+            if (array_key_exists($class = get_class($exception), $responses)) {
+                list($message, $status) = $responses[$class];
+                return response()->json(compact('message'), $status);
             }
         }
 

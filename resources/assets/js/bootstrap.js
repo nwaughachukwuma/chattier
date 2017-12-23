@@ -7,6 +7,7 @@ import Flash from './util/Flash';
 import axios from 'axios';
 import interceptors from './util/interceptors';
 import Route from 'vue-routisan';
+import ErrorPage from 'vue-error-page';
 
 Vue.config.productionTip = false;
 
@@ -27,6 +28,7 @@ window.store.addPlugin(() => {
 });
 
 Vue.use(Buefy, { defaultIconPack: 'fa' });
+Vue.use(ErrorPage, { resolver: (component) => require(`./views/errors/${component}`) });
 Vue.mixin(auth);
 Vue.mixin(config);
 
@@ -43,10 +45,10 @@ Flash.setCustomConfig({
     }
 });
 
-axios.defaults.baseURL = window.__CONFIG__.app.url + '/api';
+axios.defaults.baseURL = `${window.__CONFIG__.app.url}/api`;
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.interceptors.request.use(...interceptors.request);
 axios.interceptors.response.use(...interceptors.response);
 Vue.prototype.$http = axios;
 
-Route.setViewResolver((component) => require('./views/' + component));
+Route.setViewResolver((component) => require(`./views/${component}`));

@@ -3,7 +3,7 @@
         <navbar></navbar>
         <section class="section">
             <div class="container content">
-                <router-view></router-view>
+                <app-view></app-view>
             </div>
         </section>
     </div>
