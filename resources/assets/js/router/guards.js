@@ -1,10 +1,10 @@
 import axios from 'axios';
-import iziToast from 'izitoast';
+import Flash from '@/util/Flash';
 
 export const auth = (to, from, next) => {
     const redirectGuest = () => {
         window.store.set('url.intended', to.fullPath);
-        iziToast.info({ message: 'You must sign in to view this page.' });
+        Flash.show('You must sign in to view this page.', 'warning');
         next('/signin');
     };
 
@@ -23,7 +23,7 @@ export const guest = (to, from, next) => {
     } else {
         axios.get('/check')
             .then(() => {
-                iziToast.info({ message: 'You are already signed in.' });
+                Flash.show('You are already signed in.', 'info');
                 next('/');
             })
             .catch(() => next());

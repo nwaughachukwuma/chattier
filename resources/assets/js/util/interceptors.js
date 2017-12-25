@@ -16,13 +16,13 @@ const request = [
 const response = [
     (response) => {
         const res = response;
-        Flash.emitter(res.data, 'success');
+        Flash.interceptor(res.data, 'success');
 
         return response;
     },
     (error) => {
         const res = error.response;
-        Flash.emitter(res.data, 'error');
+        Flash.interceptor(res.data, 'error');
 
         if (res.data.message === 'jwt_refresh') {
             return new Promise((resolve, reject) => {

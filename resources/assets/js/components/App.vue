@@ -12,7 +12,6 @@
 <script>
 import Navbar from './Navbar';
 import Flash from '@/util/Flash';
-import iziToast from 'izitoast';
 
 export default {
     components: { Navbar },
@@ -29,7 +28,7 @@ export default {
                 this.$store.dispatch('logout');
                 if (!requestUrl.includes('api/check')) {
                     window.store.set('url.intended', this.$route.fullPath);
-                    iziToast.info({ message: 'Your session has expired, please sign in again.' });
+                    Flash.show('Your session has expired, please sign in again.', 'info');
                     this.$router.push('/signin');
                 }
             });

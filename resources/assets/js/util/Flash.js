@@ -1,34 +1,38 @@
 class Flash {
     constructor () {
         this._config = {
-            mode: 'extract', // 'extract'|'direct'
-            key: 'flash',
-            event: 'flash',
-            busName: 'eventBus',
-            handler: (message) => alert(message)
+            handler: (message) => alert(message),
+            extract: 'flash',
+            bus: 'eventBus',
+            event: 'flash'
         };
     }
 
-    setCustomConfig (customConfig) {
-        Object.keys(this._config).forEach((key) => {
-            this._config[key] = (customConfig.hasOwnProperty(key) ? customConfig : this._config)[key];
-        });
+    setConfig (customConfig) {
+        Object.assign(this._config, customConfig);
     }
 
-    emitter (data, options = null) {
-        if (this._config.mode === 'extract') {
-            if (data.hasOwnProperty(this._config.key)) {
-                window[this._config.busName].$emit(this._config.event, data[this._config.key], options);
-            }
-        } else if (this._config.mode === 'direct') {
-            window[this._config.busName].$emit(this._config.event, data, options);
+    show (message, options = null) {
+        this.emitter(message, options);
+    }
+
+    interceptor (data, options = null) {
+        if (data.hasOwnProperty(this._config.extract)) {
+            const message = data[this._config.extract];
+            this.emitter(message, options);
         }
     }
 
+    emitter (message, options) {
+        const config = this._config;
+        setTimeout(function () {
+            window[config.bus].$emit(config.event, message, options);
+        }, 100);
+    }
+
     listener () {
-        window[this._config.busName].$on(this._config.event, this._config.handler);
+        window[this._config.bus].$on(this._config.event, this._config.handler);
     }
 }
 
-export { Flash };
 export default new Flash();

@@ -37,7 +37,7 @@ iziToast.settings({
     timeout: 3000
 });
 
-Flash.setCustomConfig({
+Flash.setConfig({
     handler: (message, options) => {
         const validTypes = ['info', 'success', 'warning', 'error', 'question'];
         const type = (validTypes.includes(options) ? options : 'show');
