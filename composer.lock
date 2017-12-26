@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "143fbd3502edd9ec3db2f35d032ece10",
+    "content-hash": "b00981e28f4eb48324a2664061f1484f",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -682,6 +682,63 @@
                 "storage"
             ],
             "time": "2017-08-06T17:41:04+00:00"
+        },
+        {
+            "name": "merodiro/friendships",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/merodiro/Friendships.git",
+                "reference": "066fd50dc41dfe452dc2455e6f5742d52883c0fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/merodiro/Friendships/zipball/066fd50dc41dfe452dc2455e6f5742d52883c0fb",
+                "reference": "066fd50dc41dfe452dc2455e6f5742d52883c0fb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "^0.4.4",
+                "graham-campbell/testbench": "^3.3",
+                "mockery/mockery": "^0.9.5",
+                "orchestra/database": "~3.1",
+                "phpunit/phpunit": "5.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Merodiro\\Friendships\\FriendshipsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Merodiro\\Friendships\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Amr",
+                    "email": "merodiro@gmail.com"
+                }
+            ],
+            "description": "A simple package for friendships",
+            "keywords": [
+                "eloquent",
+                "friend-system",
+                "friends",
+                "friendships",
+                "laravel"
+            ],
+            "time": "2017-12-01T08:53:30+00:00"
         },
         {
             "name": "monolog/monolog",

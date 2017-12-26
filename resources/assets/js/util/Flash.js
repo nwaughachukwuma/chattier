@@ -25,7 +25,7 @@ class Flash {
 
     emitter (message, options) {
         const config = this._config;
-        setTimeout(function () {
+        setTimeout(() => {
             window[config.bus].$emit(config.event, message, options);
         }, 100);
     }
