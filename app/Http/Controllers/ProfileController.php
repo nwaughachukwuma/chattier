@@ -16,11 +16,11 @@ class ProfileController extends Controller
 
         try {
             JWTAuth::parseToken()->authenticate();
-            $relation = auth()->user()->checkFriendship($user);
+            $friendship = auth()->user()->checkFriendship($user);
         } catch (JWTException $e) {
-            $relation = 'unauthenticated';
+            $friendship = 'unauthenticated';
         }
 
-        return response()->json(compact('user', 'relation'));
+        return response()->json(compact('user', 'friendship'));
     }
 }

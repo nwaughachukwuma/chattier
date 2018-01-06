@@ -8,6 +8,8 @@
             <p>Status</p>
         </div>
         <div class="column is-4 is-offset-3">
+            <friendship v-if="showFriendship" :friendship="friendship" :user="user"/>
+
             <h4>{{ user.firstname }}'s friends</h4>
 
             <template v-if="user.friends.length">
@@ -20,22 +22,29 @@
 
 <script>
 import UserBlock from '@/components/UserBlock';
+import Friendship from '@/components/Friendship';
 
 export default {
-    components: { UserBlock },
+    components: { UserBlock, Friendship },
     data () {
         return {
             user: {
                 friends: []
-            }
+            },
+            friendship: ''
         };
+    },
+    computed: {
+        showFriendship () {
+            return !['unauthenticated', 'same user'].includes(this.friendship);
+        }
     },
     methods: {
         loadProfile () {
             this.$http.get(`/profile/${this.$route.params.username}`)
                 .then(({ data }) => {
                     this.user = data.user;
-                    console.log(data);
+                    this.friendship = data.friendship;
                 })
                 .catch((error) => {
                     if (error.response.status === 404) {
