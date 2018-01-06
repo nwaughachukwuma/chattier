@@ -1,7 +1,7 @@
 <template>
     <div class="columns">
         <div class="column is-5">
-            <user-block :user="user"></user-block>
+            <user-block :user="user"/>
             <hr>
 
             <p>Status</p>
@@ -10,8 +10,10 @@
         <div class="column is-4 is-offset-3">
             <h4>{{ user.firstname }}'s friends</h4>
 
-            <p>Friend</p>
-            <p>Friend</p>
+            <template v-if="user.friends.length">
+                <user-block v-for="friend in user.friends" :user="friend" :key="friend.id"/>
+            </template>
+            <p v-else>{{ user.firstname }} has no friends.</p>
         </div>
     </div>
 </template>
@@ -23,14 +25,17 @@ export default {
     components: { UserBlock },
     data () {
         return {
-            user: {}
+            user: {
+                friends: []
+            }
         };
     },
     methods: {
         loadProfile () {
             this.$http.get(`/profile/${this.$route.params.username}`)
-                .then((response) => {
-                    this.user = response.data.user;
+                .then(({ data }) => {
+                    this.user = data.user;
+                    console.log(data);
                 })
                 .catch((error) => {
                     if (error.response.status === 404) {

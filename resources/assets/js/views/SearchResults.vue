@@ -5,7 +5,7 @@
         <div class="columns is-multiline">
             <template v-if="users.length">
                 <div v-for="user in users" :key="user.id" class="column is-half">
-                    <user-block :user="user"></user-block>
+                    <user-block :user="user"/>
                 </div>
             </template>
             <div v-else class="column">No results found, sorry.</div>

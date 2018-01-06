@@ -28,7 +28,12 @@
 import { fullname } from '@/util/filters';
 
 export default {
-    props: ['user'],
+    props: {
+        user: {
+            type: Object,
+            required: true
+        }
+    },
     filters: { fullname },
     computed: {
         profile () {

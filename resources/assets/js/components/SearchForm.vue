@@ -1,10 +1,10 @@
 <template>
     <form @submit.prevent="onSubmitSearch">
         <b-field>
-            <b-input type="search" placeholder="Find people" v-model="keyword"></b-input>
+            <b-input type="search" placeholder="Find people" v-model="keyword"/>
             <p class="control">
                 <button class="button is-primary">
-                    <b-icon icon="search"></b-icon>
+                    <b-icon icon="search"/>
                 </button>
             </p>
         </b-field>

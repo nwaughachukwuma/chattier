@@ -1,9 +1,9 @@
 <template>
     <div>
-        <navbar></navbar>
+        <navbar/>
         <section class="section">
             <div class="container content">
-                <app-view></app-view>
+                <app-view/>
             </div>
         </section>
     </div>

@@ -5,22 +5,20 @@
             <div class="navbar-brand">
                 <router-link to="/" exact class="navbar-item">{{ $_config.app.name }}</router-link>
                 <button class="button navbar-burger" :class="{ 'is-active': isActive }" @click="isActive = !isActive">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span/><span/><span/>
                 </button>
             </div><!-- .navbar-brand -->
 
             <div class="navbar-menu" :class="{ 'is-active': isActive }">
                 <div v-if="$_auth.check" class="navbar-start">
                     <router-link to="/" exact class="navbar-item is-tab">
-                        <b-icon icon="home"></b-icon>Timeline
+                        <b-icon icon="home"/>Timeline
                     </router-link>
                     <router-link to="/friends" class="navbar-item is-tab">
-                        <b-icon icon="group"></b-icon>Friends
+                        <b-icon icon="group"/>Friends
                     </router-link>
                     <div class="navbar-item">
-                        <search-form></search-form>
+                        <search-form/>
                     </div>
                 </div><!-- .navbar-start -->
                 <div class="navbar-end">
@@ -33,19 +31,19 @@
                         </router-link>
                         <div class="navbar-dropdown is-right">
                             <a href="#" class="navbar-item">
-                                <b-icon icon="edit"></b-icon>Update profile
+                                <b-icon icon="edit"/>Update profile
                             </a>
                             <hr class="navbar-divider">
                             <a class="navbar-item" @click="onClickSignout">
-                                <b-icon icon="sign-out"></b-icon>Sign out
+                                <b-icon icon="sign-out"/>Sign out
                             </a>
                         </div>
                     </div>
                     <router-link v-if="$_auth.guest" to="/signup" class="navbar-item is-tab">
-                        <b-icon icon="vcard-o"></b-icon>Sign up
+                        <b-icon icon="vcard-o"/>Sign up
                     </router-link>
                     <router-link v-if="$_auth.guest" to="/signin" class="navbar-item is-tab">
-                        <b-icon icon="sign-in"></b-icon>Sign in
+                        <b-icon icon="sign-in"/>Sign in
                     </router-link>
                 </div><!-- .navbar-end -->
             </div><!-- .navbar-menu -->
@@ -90,11 +88,11 @@ export default {
 </script>
 
 <style scoped>
-.icon, .user-avatar {
-    margin-right: 5px;
-}
-.user-avatar {
-    border-radius: 50%;
-    overflow: hidden;
-}
+    .icon, .user-avatar {
+        margin-right: 5px;
+    }
+    .user-avatar {
+        border-radius: 50%;
+        overflow: hidden;
+    }
 </style>

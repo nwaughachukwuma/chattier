@@ -4,7 +4,7 @@
             <h1>Your friends</h1>
 
             <template v-if="friends.length">
-                <user-block v-for="friend in friends" :user="friend" :key="friend.id"></user-block>
+                <user-block v-for="friend in friends" :user="friend" :key="friend.id"/>
             </template>
             <p v-else>You have no friends.</p>
         </div>
@@ -12,7 +12,7 @@
             <h4>Friend requests</h4>
 
             <template v-if="requests.length">
-                <user-block v-for="request in requests" :user="request" :key="request.id"></user-block>
+                <user-block v-for="request in requests" :user="request" :key="request.id"/>
             </template>
             <p v-else>You have no friend requests.</p>
         </div>

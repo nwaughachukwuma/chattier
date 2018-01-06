@@ -6,8 +6,9 @@
             <div class="column is-6">
                 <form @submit.prevent="onSubmitSendLink" @keydown="form.errors.clear()" novalidate>
                     <b-field label="Email" label-for="email"
-                        :type="(form.errors.has('email') ? 'is-danger' : '')" :message="form.errors.first('email')">
-                        <b-input v-model="form.email" type="email" id="email"></b-input>
+                        :type="(form.errors.has('email') ? 'is-danger' : '')" :message="form.errors.first('email')"
+                    >
+                        <b-input v-model="form.email" type="email" id="email"/>
                     </b-field>
 
                     <b-field>
