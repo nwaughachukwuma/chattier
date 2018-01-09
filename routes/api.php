@@ -22,5 +22,7 @@ Route::get('/profile/{username}', 'ProfileController@show');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/search', 'SearchController@results');
-    Route::get('/friends', 'FriendController@index');
+    Route::resource('/friendships', 'FriendshipController', ['only' => [
+        'index', 'store', 'update', 'destroy',
+    ]]);
 });

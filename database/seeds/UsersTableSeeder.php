@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
 
         $faker = Faker\Factory::create();
 
-        $names = ['barney', 'casey', 'dale', 'elma'];
+        $names = ['barney', 'casey', 'dale', 'elma', 'fred'];
 
         foreach ($names as $name) {
             User::create([

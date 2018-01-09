@@ -31,7 +31,7 @@ export default {
         };
     },
     created () {
-        this.$http.get('/friends')
+        this.$http.get('/friendships')
             .then(({ data }) => {
                 this.friends = data.friends;
                 this.requests = data.requests;

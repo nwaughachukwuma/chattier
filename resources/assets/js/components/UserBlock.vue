@@ -28,13 +28,13 @@
 import { fullname } from '@/util/filters';
 
 export default {
+    filters: { fullname },
     props: {
         user: {
             type: Object,
             required: true
         }
     },
-    filters: { fullname },
     computed: {
         profile () {
             return `/user/${this.user.username}`;

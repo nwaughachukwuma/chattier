@@ -8,7 +8,7 @@
             <p>Status</p>
         </div>
         <div class="column is-4 is-offset-3">
-            <friendship v-if="showFriendship" :friendship="friendship" :user="user"/>
+            <friendship v-if="showFriendship" :friendship="friendship" :user="user" @friendship-changed="onFriendshipChanged"/>
 
             <h4>{{ user.firstname }}'s friends</h4>
 
@@ -51,6 +51,15 @@ export default {
                         this.$_error(404);
                     }
                 });
+        },
+        onFriendshipChanged (friendship) {
+            this.friendship = friendship;
+
+            if (friendship === 'friends') {
+                this.user.friends.push(this.$_auth.user);
+            } else if (friendship === 'not friends') {
+                this.user.friends.splice(this.user.friends.indexOf(this.$_auth.user), 1);
+            }
         }
     },
     created () {

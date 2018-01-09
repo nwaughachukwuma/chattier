@@ -25,8 +25,13 @@ class FriendshipsTableSeeder extends Seeder
                 'status' => 0,
             ],
             [
+                'requester' => 5,
+                'user_requested' => 1,
+                'status' => 0,
+            ],
+            [
                 'requester' => 1,
-                'user_requested' => 5,
+                'user_requested' => 6,
                 'status' => 0,
             ],
         ]);
