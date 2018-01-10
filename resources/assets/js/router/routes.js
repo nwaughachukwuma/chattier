@@ -6,13 +6,14 @@ Route.view('/', 'Home');
 Route.group({ guard: guest }, () => {
     Route.view('/signup', 'auth/Signup');
     Route.view('/signin', 'auth/Signin');
-    Route.view('/password/reset', 'auth/Email');
-    Route.view('/password/reset/:token', 'auth/Reset');
+    Route.view('/password/reset', 'auth/passwords/Email');
+    Route.view('/password/reset/:token', 'auth/passwords/Reset');
 });
 
 Route.view('/user/:username', 'Profile');
 
 Route.group({ guard: auth }, () => {
+    Route.view('/password/change', 'auth/passwords/Change');
     Route.view('/search', 'SearchResults');
     Route.view('/friends', 'Friends');
 });

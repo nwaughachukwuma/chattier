@@ -16,6 +16,7 @@ Route::namespace('Auth')->group(function () {
     Route::post('/password/reset', 'ResetPasswordController@reset');
     Route::get('/refresh', 'LoginController@refresh');
     Route::post('/register', 'RegisterController@register');
+    Route::post('/password/change', 'ChangePasswordController@change');
 });
 
 Route::get('/profile/{username}', 'ProfileController@show');

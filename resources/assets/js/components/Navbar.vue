@@ -33,6 +33,9 @@
                             <a href="#" class="navbar-item">
                                 <b-icon icon="edit"/>Update profile
                             </a>
+                            <router-link to="/password/change" class="navbar-item">
+                                <b-icon icon="lock"/>Change password
+                            </router-link>
                             <hr class="navbar-divider">
                             <a class="navbar-item" @click="onClickSignout">
                                 <b-icon icon="sign-out"/>Sign out

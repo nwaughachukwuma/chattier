@@ -36,7 +36,6 @@ export default {
     methods: {
         onSubmitSendLink () {
             this.form.post('/password/email')
-                .then((response) => console.log(response))
                 .catch((error) => console.log(error.response));
         }
     }
