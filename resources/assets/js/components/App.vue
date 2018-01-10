@@ -14,6 +14,11 @@ import Navbar from './Navbar';
 import Flash from '@/util/Flash';
 
 export default {
+    metaInfo: {
+        titleTemplate (title) {
+            return (title ? `${title} | ` : '') + this.$_config.app.name;
+        }
+    },
     components: { Navbar },
     methods: {
         fetchAuthUser () {

@@ -1,13 +1,14 @@
 import Vue from 'vue';
 import store from 'store';
 import Buefy from 'buefy';
+import ErrorPage from 'vue-error-page';
+import Meta from 'vue-meta';
 import { auth, config } from './util/mixins';
 import iziToast from 'izitoast';
 import Flash from './util/Flash';
 import axios from 'axios';
 import interceptors from './util/interceptors';
 import Route from 'vue-routisan';
-import ErrorPage from 'vue-error-page';
 
 Vue.config.productionTip = false;
 
@@ -29,6 +30,7 @@ window.store.addPlugin(() => {
 
 Vue.use(Buefy, { defaultIconPack: 'fa' });
 Vue.use(ErrorPage, { resolver: (component) => require(`./views/errors/${component}`) });
+Vue.use(Meta);
 Vue.mixin(auth);
 Vue.mixin(config);
 

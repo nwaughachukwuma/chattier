@@ -17,6 +17,11 @@
 import UserBlock from '@/components/UserBlock';
 
 export default {
+    metaInfo () {
+        return {
+            title: `Search '${this.keyword}'`
+        };
+    },
     components: { UserBlock },
     data () {
         return {

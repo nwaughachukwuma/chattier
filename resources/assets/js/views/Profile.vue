@@ -25,6 +25,11 @@ import UserBlock from '@/components/UserBlock';
 import Friendship from '@/components/Friendship';
 
 export default {
+    metaInfo () {
+        return {
+            title: `${this.user.firstname} ${this.user.lastname}`
+        };
+    },
     components: { UserBlock, Friendship },
     data () {
         return {

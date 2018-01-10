@@ -23,6 +23,7 @@
 import UserBlock from '@/components/UserBlock';
 
 export default {
+    metaInfo: { title: 'Friends' },
     components: { UserBlock },
     data () {
         return {

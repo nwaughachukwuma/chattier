@@ -37,6 +37,7 @@
 import Form from 'form-backend-validation';
 
 export default {
+    metaInfo: { title: 'Sign in' },
     data () {
         return {
             form: new Form({
