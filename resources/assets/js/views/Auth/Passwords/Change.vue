@@ -44,11 +44,11 @@ export default {
     metaInfo: { title: 'Change password' },
     data () {
         return {
-            form: new Form({
-                old_password: '',
-                password: '',
-                password_confirmation: ''
-            })
+            form: new Form([
+                'old_password',
+                'password',
+                'password_confirmation'
+            ])
         };
     },
     methods: {

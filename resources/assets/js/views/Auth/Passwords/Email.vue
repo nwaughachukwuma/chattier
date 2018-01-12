@@ -29,9 +29,7 @@ export default {
     metaInfo: { title: 'Reset password' },
     data () {
         return {
-            form: new Form({
-                email: ''
-            })
+            form: new Form(['email'])
         };
     },
     methods: {

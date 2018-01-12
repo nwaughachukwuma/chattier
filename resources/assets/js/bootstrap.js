@@ -29,7 +29,7 @@ window.store.addPlugin(() => {
 });
 
 Vue.use(Buefy, { defaultIconPack: 'fa' });
-Vue.use(ErrorPage, { resolver: (component) => require(`./views/errors/${component}`) });
+Vue.use(ErrorPage, { resolver: (component) => require(`./views/Errors/${component}`) });
 Vue.use(Meta);
 Vue.mixin(auth);
 Vue.mixin(config);

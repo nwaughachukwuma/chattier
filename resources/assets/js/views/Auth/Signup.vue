@@ -67,14 +67,14 @@ export default {
     metaInfo: { title: 'Sign up' },
     data () {
         return {
-            form: new Form({
-                email: '',
-                username: '',
-                firstname: '',
-                lastname: '',
-                password: '',
-                password_confirmation: ''
-            })
+            form: new Form([
+                'email',
+                'username',
+                'firstname',
+                'lastname',
+                'password',
+                'password_confirmation'
+            ])
         };
     },
     methods: {
