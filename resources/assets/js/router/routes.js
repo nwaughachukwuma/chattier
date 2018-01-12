@@ -10,9 +10,10 @@ Route.group({ guard: guest }, () => {
     Route.view('/password/reset/:token', 'Auth/Passwords/Reset');
 });
 
-Route.view('/user/:username', 'Profile');
+Route.view('/user/:username', 'Profile/Show');
 
 Route.group({ guard: auth }, () => {
+    Route.view('/profile/edit', 'Profile/Edit');
     Route.view('/password/change', 'Auth/Passwords/Change');
     Route.view('/search', 'SearchResults');
     Route.view('/friends', 'Friends');

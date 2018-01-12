@@ -52,6 +52,7 @@ export default {
                     this.friendship = data.friendship;
                 })
                 .catch((error) => {
+                    console.log(error.response);
                     if (error.response.status === 404) {
                         this.$_error(404);
                     }

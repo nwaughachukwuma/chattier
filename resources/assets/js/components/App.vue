@@ -1,11 +1,12 @@
 <template>
     <div>
         <navbar/>
-        <section class="section">
+        <section v-if="ready" class="section">
             <div class="container content">
                 <app-view/>
             </div>
         </section>
+        <b-loading :active="!ready"/>
     </div>
 </template>
 
@@ -20,12 +21,31 @@ export default {
         }
     },
     components: { Navbar },
+    data () {
+        return {
+            loaded: {
+                auth: true
+            }
+        };
+    },
+    computed: {
+        ready () {
+            return Object.values(this.loaded).every((bool) => bool);
+        }
+    },
     methods: {
         fetchAuthUser () {
             if (window.store.has('auth.token')) {
+                this.loaded.auth = false;
                 this.$http.get('/user')
-                    .then((response) => this.$store.commit('setUser', response.data))
-                    .catch((error) => console.log(error.response));
+                    .then((response) => {
+                        this.$store.commit('setUser', response.data);
+                        this.loaded.auth = true;
+                    })
+                    .catch((error) => {
+                        console.log(error.response);
+                        this.loaded.auth = true;
+                    });
             }
         },
         jwtErrorListener () {

@@ -23,4 +23,17 @@ class ProfileController extends Controller
 
         return response()->json(compact('user', 'friendship'));
     }
+
+    public function update()
+    {
+        $data = request()->validate([
+            'firstname' => 'required|max:40',
+            'lastname'  => 'required|max:40',
+            'location'  => 'max:20',
+        ]);
+
+        auth()->user()->update($data);
+
+        return response()->json(['flash' => 'Your profile has been updated.']);
+    }
 }

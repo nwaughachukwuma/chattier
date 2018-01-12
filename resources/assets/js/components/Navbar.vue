@@ -30,9 +30,9 @@
                             {{ $_auth.user | fullname }}
                         </router-link>
                         <div class="navbar-dropdown is-right">
-                            <a href="#" class="navbar-item">
+                            <router-link to="/profile/edit" class="navbar-item">
                                 <b-icon icon="edit"/>Update profile
-                            </a>
+                            </router-link>
                             <router-link to="/password/change" class="navbar-item">
                                 <b-icon icon="lock"/>Change password
                             </router-link>
