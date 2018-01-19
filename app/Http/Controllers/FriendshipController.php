@@ -18,7 +18,7 @@ class FriendshipController extends Controller
     {
         $user = User::findOrFail(request('id'));
 
-        if (auth()->user()->checkFriendship($user) !== 'not friends') {
+        if (auth()->user()->checkFriendship($user) !== 'not_friends') {
             return response()->json(['flash' => 'Invalid operation.'], 422);
         }
 

@@ -23,7 +23,7 @@
             </button>
         </template>
 
-        <button v-else-if="friendship === 'not friends'" class="button is-primary" @click="onClickAdd">
+        <button v-else-if="friendship === 'not_friends'" class="button is-primary" @click="onClickAdd">
             Add as friend
         </button>
 
@@ -54,13 +54,13 @@ export default {
             this.request('put', `/friendships/${this.user.id}`, {}, 'friends');
         },
         onClickCancel () {
-            this.request('delete', `/friendships/${this.user.id}`, { params: { action: 'cancel' } }, 'not friends');
+            this.request('delete', `/friendships/${this.user.id}`, { params: { action: 'cancel' } }, 'not_friends');
         },
         onClickDecline () {
-            this.request('delete', `/friendships/${this.user.id}`, { params: { action: 'decline' } }, 'not friends');
+            this.request('delete', `/friendships/${this.user.id}`, { params: { action: 'decline' } }, 'not_friends');
         },
         onClickUnfriend () {
-            this.request('delete', `/friendships/${this.user.id}`, { params: { action: 'unfriend' } }, 'not friends');
+            this.request('delete', `/friendships/${this.user.id}`, { params: { action: 'unfriend' } }, 'not_friends');
         },
         request (requestType, url, data, friendship) {
             this.$http[requestType](url, data)

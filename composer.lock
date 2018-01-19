@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b00981e28f4eb48324a2664061f1484f",
+    "content-hash": "354e77186813d07738620500a5cd25e4",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -685,16 +685,16 @@
         },
         {
             "name": "merodiro/friendships",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/merodiro/Friendships.git",
-                "reference": "066fd50dc41dfe452dc2455e6f5742d52883c0fb"
+                "reference": "b006b07404d1511805f969e49e6fed02593b4f8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/merodiro/Friendships/zipball/066fd50dc41dfe452dc2455e6f5742d52883c0fb",
-                "reference": "066fd50dc41dfe452dc2455e6f5742d52883c0fb",
+                "url": "https://api.github.com/repos/merodiro/Friendships/zipball/b006b07404d1511805f969e49e6fed02593b4f8e",
+                "reference": "b006b07404d1511805f969e49e6fed02593b4f8e",
                 "shasum": ""
             },
             "require": {
@@ -702,10 +702,11 @@
             },
             "require-dev": {
                 "codeclimate/php-test-reporter": "^0.4.4",
-                "graham-campbell/testbench": "^3.3",
-                "mockery/mockery": "^0.9.5",
-                "orchestra/database": "~3.1",
-                "phpunit/phpunit": "5.*"
+                "graham-campbell/testbench": "^4.0",
+                "mockery/mockery": "^1.0",
+                "orchestra/database": "~3.5",
+                "phpunit/phpunit": "6.*",
+                "squizlabs/php_codesniffer": "^3.2"
             },
             "type": "library",
             "extra": {
@@ -730,7 +731,7 @@
                     "email": "merodiro@gmail.com"
                 }
             ],
-            "description": "A simple package for friendships",
+            "description": "This package gives users the ability to manage their friendships.",
             "keywords": [
                 "eloquent",
                 "friend-system",
@@ -738,7 +739,7 @@
                 "friendships",
                 "laravel"
             ],
-            "time": "2017-12-01T08:53:30+00:00"
+            "time": "2018-01-18T13:17:32+00:00"
         },
         {
             "name": "monolog/monolog",

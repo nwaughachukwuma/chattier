@@ -41,7 +41,7 @@ export default {
     },
     computed: {
         showFriendship () {
-            return !['unauthenticated', 'same user'].includes(this.friendship);
+            return !['unauthenticated', 'same_user'].includes(this.friendship);
         }
     },
     methods: {
@@ -63,8 +63,8 @@ export default {
 
             if (friendship === 'friends') {
                 this.user.friends.push(this.$_auth.user);
-            } else if (friendship === 'not friends') {
-                this.user.friends.splice(this.user.friends.indexOf(this.$_auth.user), 1);
+            } else if (friendship === 'not_friends') {
+                this.user.friends = this.user.friends.filter((friend) => friend.id !== this.$_auth.id);
             }
         }
     },

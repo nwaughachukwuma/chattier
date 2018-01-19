@@ -20,10 +20,10 @@
         "laravel-mix": "^1.0",
         "store": "^2.0.12",
         "vue": "^2.5.13",
-        "vue-error-page": "^1.1.1",
+        "vue-error-page": "^1.1.4",
         "vue-meta": "^1.4.2",
         "vue-router": "^3.0.1",
-        "vue-routisan": "^1.1.0",
+        "vue-routisan": "^1.1.3",
         "vuex": "^3.0.1"
     }
 }
