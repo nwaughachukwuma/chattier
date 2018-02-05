@@ -4,7 +4,7 @@
 
         <div class="columns">
             <div class="column is-6">
-                <form @submit.prevent="onSubmitUpdate" @keydown="form.errors.clear()" novalidate>
+                <form @submit.prevent="onSubmitUpdate" @keydown="form.errors.clear($event.target.id)" novalidate>
                     <div class="columns">
                         <div class="column is-half">
                             <b-field label="Firstname" label-for="firstname"

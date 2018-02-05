@@ -4,7 +4,7 @@
 
         <div class="columns">
             <div class="column is-6">
-                <form @submit.prevent="onSubmitChangePassword" @keydown="form.errors.clear()" novalidate>
+                <form @submit.prevent="onSubmitChangePassword" @keydown="form.errors.clear($event.target.id)" novalidate>
                     <b-field label="Old Password" label-for="old_password"
                         :type="(form.errors.has('old_password') ? 'is-danger' : '')" :message="form.errors.first('old_password')"
                     >

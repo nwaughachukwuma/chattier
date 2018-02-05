@@ -1054,12 +1054,11 @@ browserslist@^2.1.2, browserslist@^2.10.2:
     caniuse-lite "^1.0.30000784"
     electron-to-chromium "^1.3.30"
 
-buefy@0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.5.3.tgz#50aa2243a6ac46c66327191a48d91cfb70a68658"
+buefy@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.6.3.tgz#9e9e4f4fd0193aaba42aab2af6da29513ac80b70"
   dependencies:
-    bulma "^0.5.3"
-    vue "^2.4.2"
+    bulma "^0.6.2"
 
 buffer-crc32@~0.2.3:
   version "0.2.13"
@@ -1098,13 +1097,13 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-bulma@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.5.3.tgz#be93afb6246192505c30df3f9c1c29a97d319a13"
+bulma@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.6.2.tgz#f4b1d11d5acc51a79644eb0a2b0b10649d3d71f5"
 
-bulmaswatch@0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/bulmaswatch/-/bulmaswatch-0.5.2.tgz#27886db61187344f82a35f3469ae761965544d5b"
+bulmaswatch@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/bulmaswatch/-/bulmaswatch-0.6.1.tgz#563ae5359871a4a75f2af16ba078ad691ac69762"
 
 bytes@3.0.0:
   version "3.0.0"
@@ -6944,7 +6943,7 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@^2.4.2, vue@^2.5.13:
+vue@^2.5.13:
   version "2.5.13"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.13.tgz#95bd31e20efcf7a7f39239c9aa6787ce8cf578e1"
 

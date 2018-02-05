@@ -4,7 +4,7 @@
 
         <div class="columns">
             <div class="column is-6">
-                <form @submit.prevent="onSubmitSendLink" @keydown="form.errors.clear()" novalidate>
+                <form @submit.prevent="onSubmitSendLink" @keydown="form.errors.clear($event.target.id)" novalidate>
                     <b-field label="Email" label-for="email"
                         :type="(form.errors.has('email') ? 'is-danger' : '')" :message="form.errors.first('email')"
                     >

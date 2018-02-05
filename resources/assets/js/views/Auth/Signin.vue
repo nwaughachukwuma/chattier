@@ -4,7 +4,7 @@
 
         <div class="columns">
             <div class="column is-6">
-                <form @submit.prevent="onSubmitSignin" @keydown="form.errors.clear()" novalidate>
+                <form @submit.prevent="onSubmitSignin" @keydown="form.errors.clear($event.target.id)" novalidate>
                     <b-field label="Email" label-for="email"
                         :type="(form.errors.has('email') ? 'is-danger' : '')" :message="form.errors.first('email')"
                     >
@@ -25,7 +25,7 @@
                         <button class="button is-primary" :class="{ 'is-loading': form.processing }" :disabled="form.errors.any()">
                             Sign in
                         </button>
-                        <router-link to="/password/reset" class="button is-link">Forgot your password?</router-link>
+                        <router-link to="/password/reset" class="button is-text">Forgot your password?</router-link>
                     </b-field>
                 </form>
             </div>
