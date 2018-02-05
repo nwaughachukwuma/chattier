@@ -8,7 +8,7 @@ Chatty social network from Codecourse tutorial rebuilt from scratch as a single-
 - `yarn install` or `npm install` (Yarn recommended)
 - `yarn run dev` or `npm run dev`
 - `composer install`
-- configure `.env` file based on `.env.example`,
+- configure `.env` file based on `.env.example`
 - configure database
 - configure Mailtrap
 - `php artisan key:generate`

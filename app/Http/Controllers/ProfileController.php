@@ -12,7 +12,7 @@ class ProfileController extends Controller
     {
         $user = User::where('username', $username)->firstOrFail();
 
-        $user->friends = $user->friends();
+        $friends = $user->friends();
 
         try {
             JWTAuth::parseToken()->authenticate();
@@ -21,7 +21,7 @@ class ProfileController extends Controller
             $friendship = 'unauthenticated';
         }
 
-        return response()->json(compact('user', 'friendship'));
+        return response()->json(compact('user', 'friends', 'friendship'));
     }
 
     public function update()
@@ -35,5 +35,15 @@ class ProfileController extends Controller
         auth()->user()->update($data);
 
         return response()->json(['flash' => 'Your profile has been updated.']);
+    }
+
+    public function statuses(User $user)
+    {
+        $cursor = (request()->has('cursor') ? ['id' => request('cursor')] : []);
+
+        $statuses = $user->statuses()->topLevel()
+            ->cursorPaginate(5, $cursor, 'desc');
+
+        return response()->json($statuses);
     }
 }

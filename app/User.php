@@ -23,7 +23,9 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'created_at',
+        'updated_at',
     ];
 
     protected $appends = [
@@ -39,6 +41,11 @@ class User extends Authenticatable implements JWTSubject
     {
         $hash = md5($this->email);
         return "https://www.gravatar.com/avatar/{$hash}?d=mm&s=64";
+    }
+
+    public function statuses()
+    {
+        return $this->hasMany('App\Status');
     }
 
     public function sendPasswordResetNotification($token)

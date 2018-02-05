@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "354e77186813d07738620500a5cd25e4",
+    "content-hash": "875446057046561b9c8dc0078704f72e",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -402,6 +402,112 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "lampager/lampager",
+            "version": "v0.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lampager/lampager.git",
+                "reference": "8bb439e23f811a1a2b57d3c38263c89fec607389"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lampager/lampager/zipball/8bb439e23f811a1a2b57d3c38263c89fec607389",
+                "reference": "8bb439e23f811a1a2b57d3c38263c89fec607389",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "codeception/specify": "^0.4.6",
+                "nilportugues/sql-query-formatter": "^1.2",
+                "php-coveralls/php-coveralls": "^1.0",
+                "phpunit/phpunit": "^6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lampager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "mpyw",
+                    "email": "ryosuke_i_628@yahoo.co.jp"
+                }
+            ],
+            "description": "Rapid pagination without using OFFSET",
+            "keywords": [
+                "limit",
+                "offset",
+                "pagination",
+                "paginator"
+            ],
+            "time": "2017-11-21T06:28:46+00:00"
+        },
+        {
+            "name": "lampager/lampager-laravel",
+            "version": "v0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lampager/lampager-laravel.git",
+                "reference": "efe09e64780a1b75b3a0dafd5dd8e9c2066ebd5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lampager/lampager-laravel/zipball/efe09e64780a1b75b3a0dafd5dd8e9c2066ebd5b",
+                "reference": "efe09e64780a1b75b3a0dafd5dd8e9c2066ebd5b",
+                "shasum": ""
+            },
+            "require": {
+                "lampager/lampager": "^0.3.1",
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "laravel/framework": "^5.4",
+                "nilportugues/sql-query-formatter": "^1.2",
+                "orchestra/testbench": "^3.5",
+                "php-coveralls/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Lampager\\Laravel\\MacroServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lampager\\Laravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "mpyw",
+                    "email": "ryosuke_i_628@yahoo.co.jp"
+                }
+            ],
+            "description": "Rapid pagination for Laravel",
+            "keywords": [
+                "illuminate",
+                "laravel",
+                "limit",
+                "offset",
+                "pagination",
+                "paginator"
+            ],
+            "time": "2018-01-25T03:56:42+00:00"
         },
         {
             "name": "laravel/framework",

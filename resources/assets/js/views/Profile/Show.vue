@@ -12,8 +12,8 @@
 
             <h4>{{ user.firstname }}'s friends</h4>
 
-            <template v-if="user.friends.length">
-                <user-block v-for="friend in user.friends" :user="friend" :key="friend.id"/>
+            <template v-if="friends.length">
+                <user-block v-for="friend in friends" :user="friend" :key="friend.id"/>
             </template>
             <p v-else>{{ user.firstname }} has no friends.</p>
         </div>
@@ -33,9 +33,8 @@ export default {
     components: { UserBlock, Friendship },
     data () {
         return {
-            user: {
-                friends: []
-            },
+            user: {},
+            friends: [],
             friendship: ''
         };
     },
@@ -49,6 +48,7 @@ export default {
             this.$http.get(`/profile/${this.$route.params.username}`)
                 .then(({ data }) => {
                     this.user = data.user;
+                    this.friends = data.friends;
                     this.friendship = data.friendship;
                 })
                 .catch((error) => {
@@ -62,9 +62,9 @@ export default {
             this.friendship = friendship;
 
             if (friendship === 'friends') {
-                this.user.friends.push(this.$_auth.user);
+                this.friends.push(this.$_auth.user);
             } else if (friendship === 'not_friends') {
-                this.user.friends = this.user.friends.filter((friend) => friend.id !== this.$_auth.id);
+                this.friends = this.friends.filter((friend) => friend.id !== this.$_auth.id);
             }
         }
     },

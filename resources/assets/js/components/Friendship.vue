@@ -3,28 +3,33 @@
         <template v-if="friendship === 'waiting'">
             <p>Waiting for {{ user | fullname }} to accept your request.</p>
             <button class="button is-primary" @click="onClickCancel">
-                Cancel request
+                <b-icon icon="ban" size="is-small"/>
+                <span>Cancel request</span>
             </button>
         </template>
 
         <template v-else-if="friendship === 'pending'">
             <button class="button is-success" @click="onClickAccept">
-                Accept friend request
+                <b-icon icon="user-plus" size="is-small"/>
+                <span>Accept friend request</span>
             </button>
             <button class="button is-danger" @click="onClickDecline">
-                Decline
+                <b-icon icon="ban" size="is-small"/>
+                <span>Decline</span>
             </button>
         </template>
 
         <template v-else-if="friendship === 'friends'">
             <p>You and {{ user | fullname }} are friends.</p>
             <button class="button is-danger" @click="onClickUnfriend">
-                Unfriend
+                <b-icon icon="user-times" size="is-small"/>
+                <span>Unfriend</span>
             </button>
         </template>
 
         <button v-else-if="friendship === 'not_friends'" class="button is-primary" @click="onClickAdd">
-            Add as friend
+            <b-icon icon="user-plus" size="is-small"/>
+            <span>Add as friend</span>
         </button>
 
         <hr>
