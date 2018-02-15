@@ -16,9 +16,26 @@ class Status extends Model
         'updated_at',
     ];
 
+    protected $appends = [
+        'of_friend',
+        'reply_count',
+    ];
+
     protected $with = [
         'user',
     ];
+
+    public function getOfFriendAttribute()
+    {
+        return auth()->check()
+            ? auth()->user()->isFriendsWith($this->user)
+            : false;
+    }
+
+    public function getReplyCountAttribute()
+    {
+        return $this->replies()->count();
+    }
 
     public function user()
     {

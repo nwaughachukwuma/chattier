@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
 
 class ProfileController extends Controller
 {
@@ -14,12 +12,7 @@ class ProfileController extends Controller
 
         $friends = $user->friends();
 
-        try {
-            JWTAuth::parseToken()->authenticate();
-            $friendship = auth()->user()->checkFriendship($user);
-        } catch (JWTException $e) {
-            $friendship = 'unauthenticated';
-        }
+        $friendship = (auth()->check() ? auth()->user()->checkFriendship($user) : 'unauthenticated');
 
         return response()->json(compact('user', 'friends', 'friendship'));
     }

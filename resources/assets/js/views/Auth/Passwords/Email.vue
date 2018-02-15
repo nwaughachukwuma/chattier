@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Reset password</h1>
+        <h1 class="title">Reset password</h1>
 
         <div class="columns">
             <div class="column is-6">
@@ -28,9 +28,7 @@ import Form from 'form-backend-validation';
 export default {
     metaInfo: { title: 'Reset password' },
     data () {
-        return {
-            form: new Form(['email'])
-        };
+        return { form: new Form(['email']) };
     },
     methods: {
         onSubmitSendLink () {

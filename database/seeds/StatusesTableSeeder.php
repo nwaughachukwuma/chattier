@@ -12,7 +12,7 @@ class StatusesTableSeeder extends Seeder
 
         $faker = Faker\Factory::create();
 
-        foreach (range(50, 1) as $index) {
+        foreach (range(70, 1) as $index) {
             $timePosted = Carbon::now()->subDays($index);
 
             Status::create([

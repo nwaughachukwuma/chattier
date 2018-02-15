@@ -1,3 +1,5 @@
+import User from '@/util/User';
+
 export default {
     state: {
         user: null
@@ -14,7 +16,7 @@ export default {
         }
     },
     mutations: {
-        setUser: (state, user) => (state.user = user),
+        setUser: (state, user) => (state.user = new User(user)),
         removeUser: (state) => (state.user = null),
         setToken: (state, token) => window.store.set('auth.token', token),
         removeToken: () => window.store.remove('auth.token')

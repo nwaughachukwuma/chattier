@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="content">
         <template v-if="friendship === 'waiting'">
-            <p>Waiting for {{ user | fullname }} to accept your request.</p>
-            <button class="button is-primary" @click="onClickCancel">
+            <p>Waiting for {{ user.fullname() }} to accept your request.</p>
+            <button class="button is-light" @click="onClickCancel">
                 <b-icon icon="ban" size="is-small"/>
                 <span>Cancel request</span>
             </button>
@@ -13,14 +13,14 @@
                 <b-icon icon="user-plus" size="is-small"/>
                 <span>Accept friend request</span>
             </button>
-            <button class="button is-danger" @click="onClickDecline">
+            <button class="button is-light" @click="onClickDecline">
                 <b-icon icon="ban" size="is-small"/>
                 <span>Decline</span>
             </button>
         </template>
 
         <template v-else-if="friendship === 'friends'">
-            <p>You and {{ user | fullname }} are friends.</p>
+            <p>You and {{ user.fullname() }} are friends.</p>
             <button class="button is-danger" @click="onClickUnfriend">
                 <b-icon icon="user-times" size="is-small"/>
                 <span>Unfriend</span>
@@ -37,10 +37,7 @@
 </template>
 
 <script>
-import { fullname } from '@/util/filters';
-
 export default {
-    filters: { fullname },
     props: {
         friendship: {
             type: String,

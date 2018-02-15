@@ -3,7 +3,9 @@
         <div class="container">
 
             <div class="navbar-brand">
-                <router-link to="/" exact class="navbar-item">{{ $_config.app.name }}</router-link>
+                <router-link to="/" exact active-class class="navbar-item">
+                    <strong>{{ $_config.app.name }}</strong>
+                </router-link>
                 <button class="button navbar-burger" :class="{ 'is-active': isActive }" @click="isActive = !isActive">
                     <span/><span/><span/>
                 </button>
@@ -11,10 +13,10 @@
 
             <div class="navbar-menu" :class="{ 'is-active': isActive }">
                 <div v-if="$_auth.check" class="navbar-start">
-                    <router-link to="/" exact class="navbar-item is-tab">
+                    <router-link to="/" exact class="navbar-item">
                         <b-icon icon="home"/>Timeline
                     </router-link>
-                    <router-link to="/friends" class="navbar-item is-tab">
+                    <router-link to="/friends" class="navbar-item">
                         <b-icon icon="group"/>Friends
                     </router-link>
                     <div class="navbar-item">
@@ -23,11 +25,11 @@
                 </div><!-- .navbar-start -->
                 <div class="navbar-end">
                     <div v-if="$_auth.check" class="navbar-item has-dropdown is-hoverable">
-                        <router-link :to="profile" class="navbar-link">
+                        <router-link :to="$_auth.user.profile()" class="navbar-link">
                             <figure class="image is-24x24 user-avatar">
                                 <img :src="$_auth.user.avatar" :alt="$_auth.user.username">
                             </figure>
-                            {{ $_auth.user | fullname }}
+                            {{ $_auth.user.fullname() }}
                         </router-link>
                         <div class="navbar-dropdown is-right">
                             <router-link to="/profile/edit" class="navbar-item">
@@ -42,10 +44,10 @@
                             </a>
                         </div>
                     </div>
-                    <router-link v-if="$_auth.guest" to="/signup" class="navbar-item is-tab">
+                    <router-link v-if="$_auth.guest" to="/signup" class="navbar-item">
                         <b-icon icon="vcard-o"/>Sign up
                     </router-link>
-                    <router-link v-if="$_auth.guest" to="/signin" class="navbar-item is-tab">
+                    <router-link v-if="$_auth.guest" to="/signin" class="navbar-item">
                         <b-icon icon="sign-in"/>Sign in
                     </router-link>
                 </div><!-- .navbar-end -->
@@ -57,20 +59,13 @@
 
 <script>
 import SearchForm from './SearchForm';
-import { fullname } from '@/util/filters';
 
 export default {
     components: { SearchForm },
-    filters: { fullname },
     data () {
         return {
             isActive: false
         };
-    },
-    computed: {
-        profile () {
-            return `/user/${this.$_auth.user.username}`;
-        }
     },
     methods: {
         onClickSignout () {

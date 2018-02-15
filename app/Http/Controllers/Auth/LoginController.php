@@ -14,7 +14,8 @@ class LoginController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest:api')->except('logout');
+        $this->middleware('guest:api')->only('login', 'refresh');
+        $this->middleware('jwt.auth:api')->only('logout');
     }
 
     protected function attemptLogin(Request $request)

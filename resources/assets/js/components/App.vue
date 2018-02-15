@@ -2,7 +2,7 @@
     <div>
         <navbar/>
         <section v-if="ready" class="section">
-            <div class="container content">
+            <div class="container">
                 <app-view/>
             </div>
         </section>

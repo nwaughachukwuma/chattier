@@ -1,6 +1,6 @@
 <?php
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('jwt.auth:api')->group(function () {
     Route::get('/user', function () {
         return request()->user();
     });
@@ -26,11 +26,15 @@ Route::namespace('Auth')->group(function () {
     Route::post('/password/change', 'ChangePasswordController@change');
 });
 
-Route::get('/profile/{username}', 'ProfileController@show');
+Route::middleware('jwt.custom.check:api')->group(function () {
+    Route::get('/profile/{username}', 'ProfileController@show');
 
-Route::get('/profile/{user}/statuses', 'ProfileController@statuses');
+    Route::get('/profile/{user}/statuses', 'ProfileController@statuses');
 
-Route::middleware('auth:api')->group(function () {
+    Route::get('/statuses/{status}/replies', 'ReplyController@index');
+});
+
+Route::middleware('jwt.auth:api')->group(function () {
     Route::put('/profile', 'ProfileController@update');
 
     Route::get('/search', 'SearchController@results');
@@ -40,8 +44,8 @@ Route::middleware('auth:api')->group(function () {
     ]]);
 
     Route::resource('/statuses', 'StatusController', ['only' => [
-        'index', 'store', 'show', 'destroy',
+        'index', 'store', 'destroy',
     ]]);
 
-    Route::post('/statuses/{status}/replies', 'StatusController@storeReply');
+    Route::post('/statuses/{status}/replies', 'ReplyController@store');
 });

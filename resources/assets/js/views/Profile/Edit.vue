@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Update your profile</h1>
+        <h1 class="title">Update your profile</h1>
 
         <div class="columns">
             <div class="column is-6">

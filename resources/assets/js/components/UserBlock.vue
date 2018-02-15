@@ -1,43 +1,28 @@
 <template>
-    <article class="media">
-        <figure class="media-left">
-            <p class="image is-48x48">
-                <router-link :to="profile">
-                    <img :src="user.avatar" :alt="user.username">
-                </router-link>
-            </p>
-        </figure><!-- .media-left -->
-        <div class="media-content">
-            <div class="content">
-                <p>
-                    <strong>
-                        <router-link :to="profile">
-                            {{ user | fullname }}
-                        </router-link>
-                    </strong>
-                    <small>&#64;{{ user.username }}</small>
-                    <br>
-                    {{ user.location }}
-                </p>
-            </div>
-        </div><!-- .media-content -->
-    </article>
+    <media-object>
+        <router-link slot="image" :to="user.profile()">
+            <img :src="user.avatar" :alt="user.username" class="is-rounded">
+        </router-link>
+        <p slot="content">
+            <router-link :to="user.profile()">
+                <strong>{{ user.fullname() }}</strong>
+            </router-link>
+            <small>&#64;{{ user.username }}</small>
+            <br>
+            {{ user.location }}
+        </p>
+    </media-object>
 </template>
 
 <script>
-import { fullname } from '@/util/filters';
+import MediaObject from './MediaObject';
 
 export default {
-    filters: { fullname },
+    components: { MediaObject },
     props: {
         user: {
             type: Object,
             required: true
-        }
-    },
-    computed: {
-        profile () {
-            return `/user/${this.user.username}`;
         }
     }
 };

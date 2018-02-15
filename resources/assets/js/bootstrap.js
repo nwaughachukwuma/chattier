@@ -4,7 +4,6 @@ import Buefy from 'buefy';
 import ErrorPage from 'vue-error-page';
 import Meta from 'vue-meta';
 import { auth, config } from './util/mixins';
-import iziToast from 'izitoast';
 import Flash from './util/Flash';
 import axios from 'axios';
 import interceptors from './util/interceptors';
@@ -28,22 +27,20 @@ window.store.addPlugin(() => {
     };
 });
 
-Vue.use(Buefy, { defaultIconPack: 'fa' });
+Vue.use(Buefy, {
+    defaultIconPack: 'fa',
+    defaultToastDuration: 3000,
+    defaultNoticeQueue: false
+});
 Vue.use(ErrorPage, { resolver: (component) => require(`./views/Errors/${component}`) });
 Vue.use(Meta);
 Vue.mixin(auth);
 Vue.mixin(config);
 
-iziToast.settings({
-    position: 'topCenter',
-    timeout: 3000
-});
-
 Flash.setConfig({
-    handler: (message, options) => {
-        const validTypes = ['info', 'success', 'warning', 'error', 'question'];
-        const type = (validTypes.includes(options) ? options : 'show');
-        iziToast[type]({ message });
+    handler: (message, type) => {
+        type = `is-${type}`;
+        Vue.prototype.$toast.open({ message, type });
     }
 });
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Sign in</h1>
+        <h1 class="title">Sign in</h1>
 
         <div class="columns">
             <div class="column is-6">

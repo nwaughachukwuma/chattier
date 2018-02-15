@@ -1,3 +1,3 @@
-export const fullname = (user) => {
-    return `${user.firstname} ${user.lastname}`;
-};
+import { distanceInWordsToNow } from 'date-fns';
+
+export const ago = (date) => distanceInWordsToNow(date) + ' ago';

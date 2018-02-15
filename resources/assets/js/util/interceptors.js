@@ -22,7 +22,7 @@ const response = [
     },
     (error) => {
         const res = error.response;
-        Flash.interceptor(res.data, 'error');
+        Flash.interceptor(res.data, 'danger');
 
         if (res.data.message === 'jwt_refresh') {
             return new Promise((resolve, reject) => {

@@ -1,6 +1,9 @@
 <template>
     <div>
-        <h1>Your search for "{{ keyword }}"</h1>
+        <h1 class="title">
+            Your search for "{{ keyword }}"
+            <small class="has-text-grey">({{ users.length }} results)</small>
+        </h1>
 
         <div class="columns is-multiline">
             <template v-if="users.length">
@@ -15,12 +18,11 @@
 
 <script>
 import UserBlock from '@/components/UserBlock';
+import User from '@/util/User';
 
 export default {
     metaInfo () {
-        return {
-            title: `Search '${this.keyword}'`
-        };
+        return { title: `Search '${this.keyword}'` };
     },
     components: { UserBlock },
     data () {
@@ -33,7 +35,7 @@ export default {
         loadResults () {
             this.keyword = this.$route.query.keyword;
             this.$http.get('/search', { params: { keyword: this.keyword } })
-                .then((response) => (this.users = response.data.users))
+                .then(({ data }) => (this.users = data.users.map((user) => new User(user))))
                 .catch((error) => console.log(error.response));
         }
     },
