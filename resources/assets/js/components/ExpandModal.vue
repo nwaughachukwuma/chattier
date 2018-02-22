@@ -6,6 +6,7 @@
                 <status-block
                     :status="status"
                     :actions="['like', 'delete']"
+                    jumbo
                     @status-deleted="onStatusDeleted"
                 />
 

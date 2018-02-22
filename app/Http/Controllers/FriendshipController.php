@@ -26,10 +26,8 @@ class FriendshipController extends Controller
         return response()->json(['flash' => 'Friend request sent.']);
     }
 
-    public function update($id)
+    public function update(User $user)
     {
-        $user = User::findOrFail($id);
-
         if (auth()->user()->checkFriendship($user) !== 'pending') {
             return response()->json(['flash' => 'Invalid operation.'], 422);
         }
@@ -38,10 +36,8 @@ class FriendshipController extends Controller
         return response()->json(['flash' => "{$user->firstname} is now your friend."]);
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
-
         auth()->user()->deleteFriend($user);
 
         $messages = [

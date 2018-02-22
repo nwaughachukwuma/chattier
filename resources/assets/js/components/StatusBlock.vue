@@ -4,19 +4,17 @@
             <img :src="status.user.avatar" :alt="status.user.username" class="is-rounded">
         </router-link>
         <p slot="content">
-            <router-link :to="status.user.profile()">
+            <router-link :to="status.user.profile()" :class="{ 'is-size-5': jumbo }">
                 <strong>{{ status.user.fullname() }}</strong>
             </router-link>
+            <br v-if="jumbo">
             <small>&#64;{{ status.user.username }}</small>
-            <small>{{ status.created_at | ago }}</small>
+            <small class="has-text-grey-light">{{ status.created_at | ago }}</small>
             <br>
-            {{ status.body }}
+            <span :class="{ 'is-size-4': jumbo }">{{ status.body }}</span>
         </p>
         <template v-if="actions.length" slot="actions">
-            <a v-if="actions.includes('like')" class="level-item" :disabled="!canLike">
-                <b-icon icon="thumbs-o-up" size="is-small"/>
-                <span>99</span>
-            </a>
+            <like v-if="actions.includes('like')" :status="status" @like-toggled="onLikeToggled"/>
             <a v-if="actions.includes('reply')" class="level-item" @click="onClickReply" :disabled="!canReply">
                 <b-icon icon="comment-o" size="is-small"/>
                 <span>{{ status.reply_count }}</span>
@@ -33,10 +31,11 @@
 
 <script>
 import MediaObject from './MediaObject';
+import Like from './Like';
 import { ago } from '@/util/filters';
 
 export default {
-    components: { MediaObject },
+    components: { MediaObject, Like },
     filters: { ago },
     props: {
         status: {
@@ -46,20 +45,25 @@ export default {
         actions: {
             type: Array,
             default: () => []
+        },
+        jumbo: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
         isMyStatus () {
             return this.$_auth.check && this.status.user.id === this.$_auth.id;
         },
-        canLike () {
-            return this.$_auth.check && this.status.of_friend;
-        },
         canReply () {
             return (this.isMyStatus || this.status.of_friend) && !this.status.parent_id;
         }
     },
     methods: {
+        onLikeToggled () {
+            this.status.likes_count += (this.status.liked ? -1 : 1);
+            this.status.liked = !this.status.liked;
+        },
         onClickReply () {
             this.$modal.open({
                 parent: this,
@@ -94,13 +98,3 @@ export default {
     }
 };
 </script>
-
-<style scoped>
-    .level-item[disabled] {
-        pointer-events: none;
-        opacity: 0.4;
-    }
-    .level-item .icon:not(:last-child) {
-        margin-right: 0.25rem;
-    }
-</style>

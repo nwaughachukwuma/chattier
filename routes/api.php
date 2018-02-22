@@ -39,13 +39,18 @@ Route::middleware('jwt.auth:api')->group(function () {
 
     Route::get('/search', 'SearchController@results');
 
-    Route::resource('/friendships', 'FriendshipController', ['only' => [
-        'index', 'store', 'update', 'destroy',
-    ]]);
+    Route::resource('/friendships', 'FriendshipController', [
+        'only' => ['index', 'store', 'update', 'destroy'],
+        'parameters' => ['friendships' => 'user'],
+    ]);
 
-    Route::resource('/statuses', 'StatusController', ['only' => [
-        'index', 'store', 'destroy',
-    ]]);
+    Route::resource('/statuses', 'StatusController', [
+        'only' => ['index', 'store', 'destroy'],
+    ]);
 
     Route::post('/statuses/{status}/replies', 'ReplyController@store');
+
+    Route::post('/statuses/{status}/likes', 'LikeController@store');
+
+    Route::delete('/statuses/{status}/likes', 'LikeController@destroy');
 });

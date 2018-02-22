@@ -17,7 +17,7 @@ class ReplyController extends Controller
 
         $data['user_id'] = auth()->id();
 
-        if (!in_array(auth()->user()->checkFriendship($status->user), ['friends', 'same_user'])) {
+        if (!$status->of_friend && $status->user->id !== auth()->id()) {
             return response()->json([
                 'flash' => "Add {$status->user->firstname} as a friend to reply to their statuses."
             ], 422);

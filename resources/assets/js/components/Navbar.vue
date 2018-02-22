@@ -27,7 +27,7 @@
                     <div v-if="$_auth.check" class="navbar-item has-dropdown is-hoverable">
                         <router-link :to="$_auth.user.profile()" class="navbar-link">
                             <figure class="image is-24x24 user-avatar">
-                                <img :src="$_auth.user.avatar" :alt="$_auth.user.username">
+                                <img :src="$_auth.user.avatar" :alt="$_auth.user.username" class="is-rounded">
                             </figure>
                             {{ $_auth.user.fullname() }}
                         </router-link>
@@ -84,13 +84,3 @@ export default {
     }
 };
 </script>
-
-<style scoped>
-    .icon, .user-avatar {
-        margin-right: 5px;
-    }
-    .user-avatar {
-        border-radius: 50%;
-        overflow: hidden;
-    }
-</style>

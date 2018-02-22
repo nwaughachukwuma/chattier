@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "cybercog/laravel-love": "^5.1",
         "fideloper/proxy": "~3.3",
         "lampager/lampager-laravel": "^0.2.2",
         "laravel/framework": "5.5.*",

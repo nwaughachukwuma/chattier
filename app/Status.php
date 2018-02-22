@@ -2,10 +2,14 @@
 
 namespace App;
 
+use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
+use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class Status extends Model implements LikeableContract
 {
+    use Likeable;
+
     protected $fillable = [
         'body',
         'user_id',
@@ -19,6 +23,8 @@ class Status extends Model
     protected $appends = [
         'of_friend',
         'reply_count',
+        'likes_count',
+        'liked',
     ];
 
     protected $with = [
