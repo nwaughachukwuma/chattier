@@ -2,7 +2,7 @@
     <article class="media">
 
         <figure class="media-left">
-            <p class="image is-48x48">
+            <p :class="`image is-${imageSize}x${imageSize}`">
                 <slot name="image"/>
             </p>
         </figure>
@@ -23,3 +23,14 @@
 
     </article>
 </template>
+
+<script>
+export default {
+    props: {
+        imageSize: {
+            type: Number,
+            default: 48
+        }
+    }
+};
+</script>
