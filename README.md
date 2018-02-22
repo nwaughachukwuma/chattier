@@ -1,6 +1,6 @@
 # Chattier Social Network
 
-Chatty social network from Codecourse tutorial rebuilt from scratch as a single-page app using Laravel 5.5 and Vue.js 2.
+Chatty social network from Codecourse tutorial rebuilt from scratch as a single-page app using Laravel 5.6 and Vue.js 2.
 
 ## Setup
 
