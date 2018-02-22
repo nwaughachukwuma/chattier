@@ -18,10 +18,6 @@
                     </b-field>
 
                     <b-field>
-                        <b-checkbox v-model="form.remember">Remember me</b-checkbox>
-                    </b-field>
-
-                    <b-field>
                         <button class="button is-primary" :class="{ 'is-loading': form.processing }" :disabled="form.errors.any()">
                             Sign in
                         </button>
@@ -39,13 +35,7 @@ import Form from 'form-backend-validation';
 export default {
     metaInfo: { title: 'Sign in' },
     data () {
-        return {
-            form: new Form({
-                email: '',
-                password: '',
-                remember: false
-            })
-        };
+        return { form: new Form(['email', 'password']) };
     },
     methods: {
         onSubmitSignin () {
