@@ -41,6 +41,7 @@
                             >
                                 <b-input v-model="form.password" type="password" id="password" password-reveal/>
                             </b-field>
+                            <password-meter :password="form.password"/>
                         </div>
                         <div class="column is-half">
                             <b-field label="Password confirmation" label-for="password_confirmation">
@@ -62,9 +63,11 @@
 
 <script>
 import Form from 'form-backend-validation';
+import PasswordMeter from '@/components/PasswordMeter';
 
 export default {
     metaInfo: { title: 'Sign up' },
+    components: { PasswordMeter },
     data () {
         return {
             form: new Form([
