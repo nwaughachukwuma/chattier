@@ -56,7 +56,10 @@ export default {
     methods: {
         onSubmitUpdate () {
             this.form.put('/profile')
-                .then((response) => this.$store.commit('setUser', Object.assign({}, this.$_auth.user, this.form.data())))
+                .then((response) => {
+                    const user = Object.assign({}, this.$_auth.user, this.form.data());
+                    this.$store.commit('setUser', user);
+                })
                 .catch((error) => console.log(error.response));
         }
     },

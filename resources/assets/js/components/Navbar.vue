@@ -38,6 +38,7 @@
                             <router-link to="/password/change" class="navbar-item">
                                 <b-icon icon="lock"/>Change password
                             </router-link>
+                            <theme-switcher/>
                             <hr class="navbar-divider">
                             <a class="navbar-item" @click="onClickSignout">
                                 <b-icon icon="sign-out"/>Sign out
@@ -59,9 +60,10 @@
 
 <script>
 import SearchForm from './SearchForm';
+import ThemeSwitcher from './ThemeSwitcher';
 
 export default {
-    components: { SearchForm },
+    components: { SearchForm, ThemeSwitcher },
     data () {
         return {
             isActive: false

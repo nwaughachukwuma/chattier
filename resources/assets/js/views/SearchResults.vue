@@ -35,7 +35,9 @@ export default {
         loadResults () {
             this.keyword = this.$route.query.keyword;
             this.$http.get('/search', { params: { keyword: this.keyword } })
-                .then(({ data }) => (this.users = data.users.map((user) => new User(user))))
+                .then(({ data }) => {
+                    this.users = data.map((user) => new User(user));
+                })
                 .catch((error) => console.log(error.response));
         }
     },

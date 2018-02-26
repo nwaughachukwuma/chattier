@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use DB;
 
 class SearchController extends Controller
 {
@@ -15,10 +14,13 @@ class SearchController extends Controller
             return response()->json(['message' => 'Search keyword not provided.'], 422);
         }
 
-        $users = User::where(DB::raw("CONCAT(firstname, ' ', lastname)"), 'LIKE', "%{$keyword}%")
-            ->orWhere('username', 'LIKE', "%{$keyword}%")
-            ->get();
+        $query = User::where('username', 'LIKE', "%{$keyword}%")
+            ->orWhereRaw('CONCAT(firstname, " ", lastname) LIKE ?', ["%{$keyword}%"]);
 
-        return response()->json(compact('users'));
+        if (request()->has('limit')) {
+            $query = $query->limit(request('limit'));
+        }
+
+        return response()->json($query->get());
     }
 }

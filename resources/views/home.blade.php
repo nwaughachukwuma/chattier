@@ -9,7 +9,8 @@
         {{ !empty($__env->yieldContent('title')) ? ' | ' : '' }}
         {{ config('app.name') }}
     </title>
-    {{-- <link rel="icon" href="{{ asset('favicon.ico') }}"> --}}
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    <link rel="stylesheet" href="{{ mix('css/theme-light.css') }}" title="theme">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     @include('_init')
 </head>

@@ -14,6 +14,8 @@
 import Navbar from './Navbar';
 import Flash from '@/util/Flash';
 
+const cssLink = document.head.querySelector('link[title=theme]');
+
 export default {
     metaInfo: {
         titleTemplate (title) {
@@ -57,12 +59,20 @@ export default {
                     this.$router.push('/signin');
                 }
             });
+        },
+        themeListener () {
+            window.eventBus.$on('night-mode', (nightMode) => {
+                const theme = (nightMode ? 'dark' : 'light');
+                cssLink.href = cssLink.href.replace(/theme-*(.*?)*css/g, `theme-${theme}.css`);
+                window.store.set('theme.night', nightMode);
+            });
         }
     },
     created () {
         Flash.listener();
         this.fetchAuthUser();
         this.jwtErrorListener();
+        this.themeListener();
     }
 };
 </script>

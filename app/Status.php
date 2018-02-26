@@ -33,9 +33,7 @@ class Status extends Model implements LikeableContract
 
     public function getOfFriendAttribute()
     {
-        return auth()->check()
-            ? auth()->user()->isFriendsWith($this->user)
-            : false;
+        return auth()->check() && auth()->user()->isFriendsWith($this->user);
     }
 
     public function getReplyCountAttribute()
