@@ -30,7 +30,8 @@ window.store.addPlugin(() => {
 Vue.use(Buefy, {
     defaultIconPack: 'fa',
     defaultToastDuration: 3000,
-    defaultNoticeQueue: false
+    defaultNoticeQueue: false,
+    defaultTooltipType: 'is-info'
 });
 Vue.use(ErrorPage, { resolver: (component) => require(`./views/Errors/${component}`) });
 Vue.use(Meta);

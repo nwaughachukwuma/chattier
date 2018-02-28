@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import MediaObject from './MediaObject';
-import Like from './Like';
+import MediaObject from '@/components/MediaObject';
+import Like from './Actions/Like';
 import { ago } from '@/util/filters';
 
 export default {
@@ -69,7 +69,7 @@ export default {
                 parent: this,
                 hasModalCard: true,
                 canCancel: ['escape', 'outside'],
-                component: require('./ReplyModal'),
+                component: require('./Actions/ReplyModal'),
                 props: { status: this.status }
             });
         },
@@ -78,7 +78,7 @@ export default {
                 parent: this,
                 hasModalCard: true,
                 canCancel: ['escape', 'outside'],
-                component: require('./ExpandModal'),
+                component: require('./Actions/ExpandModal'),
                 props: { status: this.status, canReply: this.canReply },
                 events: { deleted: (id) => this.$emit('status-deleted', id) }
             });

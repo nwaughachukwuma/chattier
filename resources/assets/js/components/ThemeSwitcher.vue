@@ -5,11 +5,20 @@
 </template>
 
 <script>
+const cssLink = document.head.querySelector('link[title=theme]');
+
 export default {
     data () {
         return {
             nightMode: false
         };
+    },
+    methods: {
+        setTheme (nightMode) {
+            const theme = (nightMode ? 'dark' : 'light');
+            cssLink.href = cssLink.href.replace(/theme-*(.*?)*css/g, `theme-${theme}.css`);
+            window.store.set('theme.night', nightMode);
+        }
     },
     created () {
         if (window.store.has('theme.night')) {
@@ -17,11 +26,11 @@ export default {
         }
     },
     beforeDestroy () {
-        window.eventBus.$emit('night-mode', false);
+        this.setTheme(false);
     },
     watch: {
         nightMode (current) {
-            window.eventBus.$emit('night-mode', current);
+            this.setTheme(current);
         }
     }
 };

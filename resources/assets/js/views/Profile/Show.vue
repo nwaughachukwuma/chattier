@@ -36,7 +36,7 @@
 <script>
 import UserBlock from '@/components/UserBlock';
 import Friendship from '@/components/Friendship';
-import Timeline from '@/components/Timeline';
+import Timeline from '@/components/Statuses/Timeline';
 import User from '@/util/User';
 
 export default {

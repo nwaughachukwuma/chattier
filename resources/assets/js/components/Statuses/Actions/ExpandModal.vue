@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import StatusBlock from './StatusBlock';
-import StatusForm from './StatusForm';
+import StatusBlock from '@/components/Statuses/StatusBlock';
+import StatusForm from '@/components/Statuses/StatusForm';
 import User from '@/util/User';
 
 export default {
