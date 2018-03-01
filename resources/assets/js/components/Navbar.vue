@@ -25,11 +25,11 @@
                 </div><!-- .navbar-start -->
                 <div class="navbar-end">
                     <div v-if="$_auth.check" class="navbar-item has-dropdown is-hoverable">
-                        <router-link :to="$_auth.user.profile()" class="navbar-link">
+                        <router-link :to="profile($_auth.user)" class="navbar-link">
                             <figure class="image is-24x24 user-avatar">
                                 <img :src="$_auth.user.avatar" :alt="$_auth.user.username" class="is-rounded">
                             </figure>
-                            {{ $_auth.user.fullname() }}
+                            {{ $_auth.user.firstname }} {{ $_auth.user.lastname }}
                         </router-link>
                         <div class="navbar-dropdown is-right">
                             <router-link to="/profile/edit" class="navbar-item">
@@ -61,9 +61,11 @@
 <script>
 import SearchForm from './SearchForm';
 import ThemeSwitcher from './ThemeSwitcher';
+import { profile } from '@/util/mixins';
 
 export default {
     components: { SearchForm, ThemeSwitcher },
+    mixins: [profile],
     data () {
         return {
             isActive: false

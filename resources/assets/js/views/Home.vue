@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Timeline from '@/components/Statuses/Timeline';
+import Timeline from '@/components/Status/Timeline';
 import FrameworkInfo from '@/components/FrameworkInfo';
 
 export default {

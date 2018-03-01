@@ -22,7 +22,7 @@ class Status extends Model implements LikeableContract
 
     protected $appends = [
         'of_friend',
-        'reply_count',
+        'replies_count',
         'likes_count',
         'liked',
     ];
@@ -36,7 +36,7 @@ class Status extends Model implements LikeableContract
         return auth()->check() && auth()->user()->isFriendsWith($this->user);
     }
 
-    public function getReplyCountAttribute()
+    public function getRepliesCountAttribute()
     {
         return $this->replies()->count();
     }

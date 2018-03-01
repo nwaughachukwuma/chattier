@@ -36,12 +36,12 @@
 <script>
 import UserBlock from '@/components/UserBlock';
 import Friendship from '@/components/Friendship';
-import Timeline from '@/components/Statuses/Timeline';
-import User from '@/util/User';
+import Timeline from '@/components/Status/Timeline';
 
 export default {
     metaInfo () {
-        return { title: (this.user ? this.user.fullname() : '') };
+        const user = this.user;
+        return { title: (user ? `${user.firstname} ${user.lastname}` : '') };
     },
     components: { UserBlock, Friendship, Timeline },
     data () {
@@ -61,8 +61,8 @@ export default {
             this.user = null;
             this.$http.get(`/profile/${this.$route.params.username}`)
                 .then(({ data }) => {
-                    this.user = new User(data.user);
-                    this.friends = data.friends.map((user) => new User(user));
+                    this.user = data.user;
+                    this.friends = data.friends;
                     this.friendship = data.friendship;
                 })
                 .catch((error) => {

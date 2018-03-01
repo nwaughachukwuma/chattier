@@ -12,7 +12,7 @@
         </template>
 
         <template v-if="statuses.length">
-            <status-block
+            <status
                 v-for="status in statuses"
                 :status="status"
                 :key="status.id"
@@ -31,12 +31,11 @@
 
 <script>
 import infiniteScroll from 'vue-infinite-scroll';
-import StatusBlock from './StatusBlock';
+import Status from './Status';
 import StatusForm from './StatusForm';
-import User from '@/util/User';
 
 export default {
-    components: { StatusBlock, StatusForm },
+    components: { Status, StatusForm },
     directives: { infiniteScroll },
     props: {
         endpoint: {
@@ -78,12 +77,7 @@ export default {
                 .then(({ data }) => {
                     this.loading = false;
 
-                    const statuses = data.records.map((status) => {
-                        status.user = new User(status.user);
-                        return status;
-                    });
-
-                    this.statuses = this.statuses.concat(statuses);
+                    this.statuses = this.statuses.concat(data.records);
                     this.cursor = (data.has_next ? data.next_cursor.id : null);
                     this.last = !data.has_next;
                 })
@@ -93,7 +87,6 @@ export default {
                 });
         },
         onStatusPosted (status) {
-            status.user = new User(status.user);
             this.statuses.unshift(status);
         },
         onStatusDeleted (id) {

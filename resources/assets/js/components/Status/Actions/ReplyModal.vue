@@ -1,12 +1,12 @@
 <template>
     <div class="modal-card">
         <header class="modal-card-head">
-            <p class="modal-card-title">Reply to {{ status.user.fullname() }}</p>
+            <p class="modal-card-title">Reply to {{ status.user.firstname }} {{ status.user.lastname }}</p>
             <button class="delete" @click="$parent.close()"/>
         </header>
         <section class="modal-card-body">
 
-            <status-block :status="status"/>
+            <status :status="status"/>
 
             <hr>
 
@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import StatusBlock from '@/components/Statuses/StatusBlock';
-import StatusForm from '@/components/Statuses/StatusForm';
+import Status from '@/components/Status/Status';
+import StatusForm from '@/components/Status/StatusForm';
 
 export default {
-    components: { StatusBlock, StatusForm },
+    components: { Status, StatusForm },
     props: {
         status: {
             type: Object,
@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         onReplyPosted () {
-            this.status.reply_count++;
+            this.status.replies_count++;
             this.$parent.close();
         }
     }

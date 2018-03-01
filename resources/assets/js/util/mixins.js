@@ -13,3 +13,11 @@ export const config = {
         }
     }
 };
+
+export const profile = {
+    methods: {
+        profile ({ username }) {
+            return `/user/${username}`;
+        }
+    }
+};

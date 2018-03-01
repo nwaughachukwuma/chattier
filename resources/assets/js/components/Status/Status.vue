@@ -1,14 +1,14 @@
 <template>
     <media-object>
-        <router-link slot="image" :to="status.user.profile()">
-            <img :src="status.user.avatar" :alt="status.user.username" class="is-rounded">
+        <router-link slot="image" :to="profile(user)">
+            <img :src="user.avatar" :alt="user.username" class="is-rounded">
         </router-link>
         <p slot="content">
-            <router-link :to="status.user.profile()" :class="{ 'is-size-5': jumbo }">
-                <strong>{{ status.user.fullname() }}</strong>
+            <router-link :to="profile(user)" :class="{ 'is-size-5': jumbo }">
+                <strong>{{ user.firstname }} {{ user.lastname }}</strong>
             </router-link>
             <br v-if="jumbo">
-            <small>&#64;{{ status.user.username }}</small>
+            <small>&#64;{{ user.username }}</small>
             <small class="has-text-grey-light">{{ status.created_at | ago }}</small>
             <br>
             <span :class="{ 'is-size-4': jumbo }">{{ status.body }}</span>
@@ -17,7 +17,7 @@
             <like v-if="actions.includes('like')" :status="status" @like-toggled="onLikeToggled"/>
             <a v-if="actions.includes('reply')" class="level-item" @click="onClickReply" :disabled="!canReply">
                 <b-icon icon="comment-o" size="is-small"/>
-                <span>{{ status.reply_count }}</span>
+                <span>{{ status.replies_count }}</span>
             </a>
             <a v-if="actions.includes('expand')" class="level-item" @click="onClickExpand">
                 <b-icon icon="expand" size="is-small"/>
@@ -32,10 +32,12 @@
 <script>
 import MediaObject from '@/components/MediaObject';
 import Like from './Actions/Like';
+import { profile } from '@/util/mixins';
 import { ago } from '@/util/filters';
 
 export default {
     components: { MediaObject, Like },
+    mixins: [profile],
     filters: { ago },
     props: {
         status: {
@@ -52,8 +54,11 @@ export default {
         }
     },
     computed: {
+        user () {
+            return this.status.user;
+        },
         isMyStatus () {
-            return this.$_auth.check && this.status.user.id === this.$_auth.id;
+            return this.$_auth.check && this.user.id === this.$_auth.id;
         },
         canReply () {
             return (this.isMyStatus || this.status.of_friend) && !this.status.parent_id;

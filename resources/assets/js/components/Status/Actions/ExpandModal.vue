@@ -3,7 +3,7 @@
         <section class="modal-card-body">
 
             <template>
-                <status-block
+                <status
                     :status="status"
                     :actions="['like', 'delete']"
                     jumbo
@@ -26,7 +26,7 @@
                 <template v-if="replies.length">
                     <hr>
 
-                    <status-block
+                    <status
                         v-for="reply in replies"
                         :status="reply"
                         :key="reply.id"
@@ -41,12 +41,11 @@
 </template>
 
 <script>
-import StatusBlock from '@/components/Statuses/StatusBlock';
-import StatusForm from '@/components/Statuses/StatusForm';
-import User from '@/util/User';
+import Status from '@/components/Status/Status';
+import StatusForm from '@/components/Status/StatusForm';
 
 export default {
-    components: { StatusBlock, StatusForm },
+    components: { Status, StatusForm },
     props: {
         status: {
             type: Object,
@@ -63,14 +62,10 @@ export default {
         };
     },
     methods: {
-        morphStatusUser (status) {
-            status.user = new User(status.user);
-            return status;
-        },
         fetchReplies () {
             this.$http.get(`/statuses/${this.status.id}/replies`)
                 .then(({ data }) => {
-                    this.replies = data.reverse().map(this.morphStatusUser);
+                    this.replies = data.reverse();
                 })
                 .catch((error) => console.log(error.response));
         },
@@ -79,7 +74,7 @@ export default {
             this.$parent.close();
         },
         onReplyPosted (reply) {
-            this.replies.unshift(this.morphStatusUser(reply));
+            this.replies.unshift(reply);
         },
         onReplyDeleted (id) {
             this.replies.splice(this.replies.indexOf(
@@ -92,7 +87,7 @@ export default {
     },
     watch: {
         replies () {
-            this.status.reply_count = this.replies.length;
+            this.status.replies_count = this.replies.length;
         }
     }
 };

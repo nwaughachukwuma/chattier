@@ -21,7 +21,6 @@
 
 <script>
 import UserBlock from '@/components/UserBlock';
-import User from '@/util/User';
 
 export default {
     metaInfo: { title: 'Friends' },
@@ -35,8 +34,8 @@ export default {
     created () {
         this.$http.get('/friendships')
             .then(({ data }) => {
-                this.friends = data.friends.map((user) => new User(user));
-                this.requests = data.requests.map((user) => new User(user));
+                this.friends = data.friends;
+                this.requests = data.requests;
             })
             .catch((error) => console.log(error.response));
     }

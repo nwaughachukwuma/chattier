@@ -18,7 +18,6 @@
 
 <script>
 import UserBlock from '@/components/UserBlock';
-import User from '@/util/User';
 
 export default {
     metaInfo () {
@@ -36,7 +35,7 @@ export default {
             this.keyword = this.$route.query.keyword;
             this.$http.get('/search', { params: { keyword: this.keyword } })
                 .then(({ data }) => {
-                    this.users = data.map((user) => new User(user));
+                    this.users = data;
                 })
                 .catch((error) => console.log(error.response));
         }
