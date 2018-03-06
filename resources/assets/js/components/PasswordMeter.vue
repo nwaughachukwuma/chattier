@@ -1,9 +1,12 @@
 <template>
-    <progress
-        :class="`progress is-${color}`"
-        :value="adjustedScore"
-        max="5"
-    />
+    <div>
+        <progress
+            :class="`progress is-${color}`"
+            :value="adjustedScore"
+            max="5"
+        />
+        <p class="help is-danger">{{ warning }}</p>
+    </div>
 </template>
 
 <script>
@@ -16,18 +19,25 @@ export default {
             required: true
         }
     },
-    computed: {
-        result () {
-            return zxcvbn(this.password);
+    data () {
+        return {
+            adjustedScore: 0,
+            warning: '',
+            color: ''
+        };
+    },
+    watch: {
+        password (password) {
+            const result = zxcvbn(password);
+
+            this.adjustedScore = (password ? result.score + 1 : 0);
+            this.warning = result.feedback.warning;
+            this.color = (result.score <= 2 ? 'danger' : 'success');
         },
-        adjustedScore () {
-            return (this.password ? this.result.score + 1 : 0);
-        },
-        isWeak () {
-            return this.result.score <= 2;
-        },
-        color () {
-            return (this.isWeak ? 'danger' : 'success');
+        warning (warning) {
+            if (warning !== '' && !warning.endsWith('.')) {
+                this.warning = `${warning}.`;
+            }
         }
     }
 };

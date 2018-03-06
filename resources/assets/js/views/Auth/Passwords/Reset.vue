@@ -13,12 +13,12 @@
 
                     <div class="columns">
                         <div class="column is-half">
-                            <b-field label="Password" label-for="password"
+                            <b-field label="Password" label-for="password" :addons="false"
                                 :type="(form.errors.has('password') ? 'is-danger' : '')" :message="form.errors.first('password')"
                             >
                                 <b-input v-model="form.password" type="password" id="password" password-reveal/>
+                                <password-meter :password="form.password"/>
                             </b-field>
-                            <password-meter :password="form.password"/>
                         </div>
                         <div class="column is-half">
                             <b-field label="Password confirmation" label-for="password_confirmation">
