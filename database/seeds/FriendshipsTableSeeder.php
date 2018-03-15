@@ -1,59 +1,24 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Merodiro\Friendships\Friendship;
 
 class FriendshipsTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('friendships')->truncate();
+        Friendship::truncate();
 
-        DB::table('friendships')->insert([
-            [
-                'requester' => 2,
-                'user_requested' => 1,
-                'status' => 1,
-            ],
-            [
-                'requester' => 1,
-                'user_requested' => 3,
-                'status' => 1,
-            ],
-            [
-                'requester' => 4,
-                'user_requested' => 1,
-                'status' => 0,
-            ],
-            [
-                'requester' => 5,
-                'user_requested' => 1,
-                'status' => 0,
-            ],
-            [
-                'requester' => 1,
-                'user_requested' => 6,
-                'status' => 0,
-            ],
-            [
-                'requester' => 2,
-                'user_requested' => 6,
-                'status' => 1,
-            ],
-            [
-                'requester' => 2,
-                'user_requested' => 7,
-                'status' => 1,
-            ],
-            [
-                'requester' => 3,
-                'user_requested' => 6,
-                'status' => 1,
-            ],
-            [
-                'requester' => 3,
-                'user_requested' => 7,
-                'status' => 1,
-            ],
-        ]);
+        collect([
+            [2, 1, 1], [1, 3, 1], [4, 1, 0], [5, 1, 0], [1, 6, 0],
+            [2, 6, 1], [2, 7, 1], [2, 8, 1], [2, 9, 1], [2, 10, 1], [2, 11, 1],
+            [3, 6, 1], [3, 7, 1], [3, 8, 1], [3, 9, 1], [3, 10, 1], [3, 11, 1],
+            [4, 6, 1], [4, 7, 1], [4, 8, 1], [4, 9, 1], [4, 10, 1], [4, 11, 1],
+            [5, 6, 1], [5, 7, 1], [5, 8, 1], [5, 9, 1], [5, 10, 1], [5, 11, 1],
+        ])->each(function ($values) {
+            Friendship::create(
+                array_combine(['requester', 'user_requested', 'status'], $values)
+            );
+        });
     }
 }

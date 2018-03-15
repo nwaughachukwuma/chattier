@@ -12,9 +12,15 @@ class ProfileController extends Controller
 
         $friends = $user->friends();
 
+        $friends_total = $friends->count();
+
+        if ($friends_total > 6) {
+            $friends = $friends->random(7)->shuffle();
+        }
+
         $friendship = (auth()->check() ? auth()->user()->checkFriendship($user) : 'unauthenticated');
 
-        return response()->json(compact('user', 'friends', 'friendship'));
+        return response()->json(compact('user', 'friends', 'friends_total', 'friendship'));
     }
 
     public function update()

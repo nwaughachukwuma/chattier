@@ -31,9 +31,8 @@ export default {
         onClickLike () {
             const requestType = (this.status.liked ? 'delete' : 'post');
 
-            this.$http[requestType](`/statuses/${this.status.id}/likes`)
-                .then((response) => this.$emit('like-toggled'))
-                .catch((error) => console.log(error.response));
+            this.$http[requestType](`/statuses/${this.status.id}/likes`);
+            this.$emit('like-toggled');
         }
     }
 };

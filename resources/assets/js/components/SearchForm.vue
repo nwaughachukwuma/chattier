@@ -17,9 +17,7 @@
 <script>
 export default {
     data () {
-        return {
-            keyword: ''
-        };
+        return { keyword: '' };
     },
     computed: {
         trimmedKeyword () {

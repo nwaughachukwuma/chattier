@@ -3,7 +3,7 @@
         <h1 class="title">Sign up</h1>
 
         <div class="columns">
-            <div class="column is-6">
+            <div class="column is-6-widescreen is-7-desktop is-8-tablet">
                 <form @submit.prevent="onSubmitSignup" @keydown="form.errors.clear($event.target.id)" novalidate>
                     <b-field label="Your email address" label-for="email"
                         :type="(form.errors.has('email') ? 'is-danger' : '')" :message="form.errors.first('email')"

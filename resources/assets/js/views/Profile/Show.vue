@@ -1,59 +1,76 @@
 <template>
-    <div v-if="user" class="columns">
-        <div class="column is-6-widescreen">
+    <div v-if="user" class="columns is-multiline">
+        <div class="column is-6-widescreen is-7-desktop is-8-tablet">
+            <user-block :user="user" jumbo/>
+        </div>
 
-            <user-block :user="user"/>
+        <div class="column
+            is-4-widescreen is-offset-2-widescreen
+            is-4-desktop is-offset-1-desktop
+            is-4-tablet
+        ">
+            <friendship v-if="showFriendship" :friendship.sync="friendship" :user="user"/>
+        </div>
 
+        <div class="column is-full">
             <hr>
+        </div>
 
+        <div class="column is-6-widescreen is-7-desktop is-8-tablet">
             <timeline
                 :endpoint="`/profile/${user.id}/statuses`"
                 :empty="`${user.firstname} hasn't posted anything yet.`"
                 :friendship="friendship"
                 :can-post="user.id === $_auth.id"
             />
-
         </div>
 
-        <div class="column is-4-widescreen is-offset-2-widescreen">
-
-            <friendship v-if="showFriendship" :friendship="friendship" :user="user" @friendship-changed="onFriendshipChanged"/>
-
-            <h4 class="subtitle">{{ user.firstname }}'s friends</h4>
+        <div class="column
+            is-4-widescreen is-offset-2-widescreen
+            is-4-desktop is-offset-1-desktop
+            is-4-tablet
+            is-hidden-mobile
+        ">
+            <h4 class="subtitle">
+                {{ user.firstname }}'s friends
+                <small class="has-text-grey">{{ friends_total }}</small>
+            </h4>
 
             <template v-if="friends.length">
-                <user-block v-for="friend in friends" :user="friend" :key="friend.id"/>
+                <user-block v-for="friend in displayedFriends" :user="friend" :key="friend.id"/>
             </template>
             <p v-else>{{ user.firstname }} has no friends.</p>
-
         </div>
     </div>
-    <div v-else class="has-text-centered">
-        <b-icon icon="spinner" custom-class="fa-pulse" size="is-medium"/>
-    </div>
+    <spinner v-else/>
 </template>
 
 <script>
 import UserBlock from '@/components/UserBlock';
 import Friendship from '@/components/Friendship';
 import Timeline from '@/components/Status/Timeline';
+import Spinner from '@/components/Spinner';
 
 export default {
     metaInfo () {
         const user = this.user;
         return { title: (user ? `${user.firstname} ${user.lastname}` : '') };
     },
-    components: { UserBlock, Friendship, Timeline },
+    components: { UserBlock, Friendship, Timeline, Spinner },
     data () {
         return {
             user: null,
             friends: [],
+            friends_total: 0,
             friendship: ''
         };
     },
     computed: {
         showFriendship () {
             return !['unauthenticated', 'same_user'].includes(this.friendship);
+        },
+        displayedFriends () {
+            return this.friends.slice(0, 6);
         }
     },
     methods: {
@@ -63,6 +80,7 @@ export default {
                 .then(({ data }) => {
                     this.user = data.user;
                     this.friends = data.friends;
+                    this.friends_total = data.friends_total;
                     this.friendship = data.friendship;
                 })
                 .catch((error) => {
@@ -71,23 +89,24 @@ export default {
                         this.$_error(404);
                     }
                 });
-        },
-        onFriendshipChanged (friendship) {
-            this.friendship = friendship;
-
-            if (friendship === 'friends') {
-                this.friends.push(this.$_auth.user);
-            } else if (friendship === 'not_friends') {
-                this.friends.splice(this.friends.indexOf(
-                    this.friends.find((friend) => friend.id === this.$_auth.id)
-                ), 1);
-            }
         }
     },
     created () {
         this.loadProfile();
     },
     watch: {
+        friendship (current, old) {
+            const change = `${old} > ${current}`;
+            if (change === 'friends > not_friends') {
+                this.friends_total--;
+                this.friends.splice(this.friends.indexOf(
+                    this.friends.find((friend) => friend.id === this.$_auth.id)
+                ), 1);
+            } else if (change === 'pending > friends') {
+                this.friends_total++;
+                this.friends.unshift(this.$_auth.user);
+            }
+        },
         '$route.params.username' () {
             this.loadProfile();
         }

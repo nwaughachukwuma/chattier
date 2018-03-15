@@ -3,7 +3,7 @@
         <h1 class="title">Change password</h1>
 
         <div class="columns">
-            <div class="column is-6">
+            <div class="column is-6-widescreen is-7-desktop is-8-tablet">
                 <form @submit.prevent="onSubmitChangePassword" @keydown="form.errors.clear($event.target.id)" novalidate>
                     <b-field label="Old Password" label-for="old_password"
                         :type="(form.errors.has('old_password') ? 'is-danger' : '')" :message="form.errors.first('old_password')"

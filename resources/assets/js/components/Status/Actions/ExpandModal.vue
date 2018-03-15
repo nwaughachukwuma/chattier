@@ -23,9 +23,9 @@
                     You must be friends with {{ status.user.firstname }} to reply to their statuses.
                 </p>
 
-                <template v-if="replies.length">
-                    <hr>
+                <hr>
 
+                <template v-if="replies.length">
                     <status
                         v-for="reply in replies"
                         :status="reply"
@@ -34,6 +34,8 @@
                         @status-deleted="onReplyDeleted"
                     />
                 </template>
+
+                <spinner :class="{ 'is-invisible': !loading }"/>
             </template>
 
         </section>
@@ -43,9 +45,10 @@
 <script>
 import Status from '@/components/Status/Status';
 import StatusForm from '@/components/Status/StatusForm';
+import Spinner from '@/components/Spinner';
 
 export default {
-    components: { Status, StatusForm },
+    components: { Status, StatusForm, Spinner },
     props: {
         status: {
             type: Object,
@@ -58,16 +61,21 @@ export default {
     },
     data () {
         return {
-            replies: []
+            replies: [],
+            loading: true
         };
     },
     methods: {
         fetchReplies () {
             this.$http.get(`/statuses/${this.status.id}/replies`)
                 .then(({ data }) => {
+                    this.loading = false;
                     this.replies = data.reverse();
                 })
-                .catch((error) => console.log(error.response));
+                .catch((error) => {
+                    this.loading = false;
+                    console.log(error.response);
+                });
         },
         onStatusDeleted () {
             this.$emit('deleted', this.status.id);
@@ -88,6 +96,9 @@ export default {
     watch: {
         replies () {
             this.status.replies_count = this.replies.length;
+        },
+        '$route' () {
+            this.$parent.close();
         }
     }
 };

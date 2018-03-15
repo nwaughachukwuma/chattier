@@ -3,7 +3,7 @@
         <h1 class="title">Reset password</h1>
 
         <div class="columns">
-            <div class="column is-6">
+            <div class="column is-6-widescreen is-7-desktop is-8-tablet">
                 <form @submit.prevent="onSubmitResetPassword" @keydown="form.errors.clear($event.target.id)" novalidate>
                     <b-field label="Email" label-for="email"
                         :type="(form.errors.has('email') ? 'is-danger' : '')" :message="form.errors.first('email')"

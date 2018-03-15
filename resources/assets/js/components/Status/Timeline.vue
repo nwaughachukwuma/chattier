@@ -20,11 +20,9 @@
                 @status-deleted="onStatusDeleted"
             />
         </template>
-        <p v-else>{{ empty }}</p>
+        <p v-else-if="!loading">{{ empty }}</p>
 
-        <div class="has-text-centered" :class="{ 'is-invisible': !loading }">
-            <b-icon icon="spinner" custom-class="fa-pulse" size="is-medium"/>
-        </div>
+        <spinner :class="{ 'is-invisible': !loading }"/>
 
     </div>
 </template>
@@ -33,9 +31,10 @@
 import infiniteScroll from 'vue-infinite-scroll';
 import Status from './Status';
 import StatusForm from './StatusForm';
+import Spinner from '@/components/Spinner';
 
 export default {
-    components: { Status, StatusForm },
+    components: { Status, StatusForm, Spinner },
     directives: { infiniteScroll },
     props: {
         endpoint: {

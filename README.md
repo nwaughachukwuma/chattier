@@ -2,6 +2,10 @@
 
 Chatty social network from Codecourse tutorial rebuilt from scratch as a single-page app using Laravel 5.6 and Vue.js 2.
 
+## Demo
+
+A live demo of this project can be found [here](https://raniesantos-chattier.herokuapp.com/).
+
 ## Setup
 
 - Start your local server. (Laravel Homestead, XAMPP/WAMP/MAMP, etc.)

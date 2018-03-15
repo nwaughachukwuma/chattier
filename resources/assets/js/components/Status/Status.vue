@@ -82,7 +82,6 @@ export default {
             this.$modal.open({
                 parent: this,
                 hasModalCard: true,
-                canCancel: ['escape', 'outside'],
                 component: require('./Actions/ExpandModal'),
                 props: { status: this.status, canReply: this.canReply },
                 events: { deleted: (id) => this.$emit('status-deleted', id) }

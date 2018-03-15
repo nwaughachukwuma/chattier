@@ -2,8 +2,19 @@
     <div>
         <h1 class="title">Update your profile</h1>
 
+        <div class="columns is-vcentered">
+            <div class="column is-narrow">
+                <figure class="image is-64x64">
+                    <img :src="$_auth.user.avatar" :alt="$_auth.user.username" class="is-rounded">
+                </figure>
+            </div>
+            <div class="column">
+                Change your avatar at <a href="https://en.gravatar.com/emails/" target="_blank">gravatar.com</a>
+            </div>
+        </div><!-- .columns -->
+
         <div class="columns">
-            <div class="column is-6">
+            <div class="column is-6-widescreen is-7-desktop is-8-tablet">
                 <form @submit.prevent="onSubmitUpdate" @keydown="form.errors.clear($event.target.id)" novalidate>
                     <div class="columns">
                         <div class="column is-half">

@@ -38,6 +38,11 @@ export default {
             this.status.replies_count++;
             this.$parent.close();
         }
+    },
+    watch: {
+        '$route' () {
+            this.$parent.close();
+        }
     }
 };
 </script>

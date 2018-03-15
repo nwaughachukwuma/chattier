@@ -9,9 +9,7 @@ const cssLink = document.head.querySelector('link[title=theme]');
 
 export default {
     data () {
-        return {
-            nightMode: false
-        };
+        return { nightMode: false };
     },
     methods: {
         setTheme (nightMode) {
@@ -24,9 +22,6 @@ export default {
         if (window.store.has('theme.night')) {
             this.nightMode = window.store.get('theme.night');
         }
-    },
-    beforeDestroy () {
-        this.setTheme(false);
     },
     watch: {
         nightMode (current) {

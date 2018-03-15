@@ -2,18 +2,18 @@
     <div class="content">
         <template v-if="friendship === 'waiting'">
             <p>Waiting for {{ user.firstname }} {{ user.lastname }} to accept your request.</p>
-            <button class="button is-light" @click="onClickCancel">
+            <button class="button is-light" :class="{ 'is-loading': processing }" @click="onClickCancel">
                 <b-icon icon="ban" size="is-small"/>
                 <span>Cancel request</span>
             </button>
         </template>
 
         <template v-else-if="friendship === 'pending'">
-            <button class="button is-success" @click="onClickAccept">
+            <button class="button is-success" :class="{ 'is-loading': processing }" @click="onClickAccept">
                 <b-icon icon="user-plus" size="is-small"/>
                 <span>Accept friend request</span>
             </button>
-            <button class="button is-light" @click="onClickDecline">
+            <button class="button is-light" :class="{ 'is-loading': processing }" @click="onClickDecline">
                 <b-icon icon="ban" size="is-small"/>
                 <span>Decline</span>
             </button>
@@ -21,18 +21,18 @@
 
         <template v-else-if="friendship === 'friends'">
             <p>You and {{ user.firstname }} {{ user.lastname }} are friends.</p>
-            <button class="button is-danger" @click="onClickUnfriend">
+            <button class="button is-danger" :class="{ 'is-loading': processing }" @click="onClickUnfriend">
                 <b-icon icon="user-times" size="is-small"/>
                 <span>Unfriend</span>
             </button>
         </template>
 
-        <button v-else-if="friendship === 'not_friends'" class="button is-primary" @click="onClickAdd">
-            <b-icon icon="user-plus" size="is-small"/>
-            <span>Add as friend</span>
-        </button>
-
-        <hr>
+        <template v-else-if="friendship === 'not_friends'">
+            <button class="button is-primary" :class="{ 'is-loading': processing }" @click="onClickAdd">
+                <b-icon icon="user-plus" size="is-small"/>
+                <span>Add as friend</span>
+            </button>
+        </template>
     </div>
 </template>
 
@@ -48,6 +48,9 @@ export default {
             required: true
         }
     },
+    data () {
+        return { processing: false };
+    },
     methods: {
         onClickAdd () {
             this.request('post', '/friendships', { id: this.user.id }, 'waiting');
@@ -62,12 +65,26 @@ export default {
             this.request('delete', `/friendships/${this.user.id}`, { params: { action: 'decline' } }, 'not_friends');
         },
         onClickUnfriend () {
-            this.request('delete', `/friendships/${this.user.id}`, { params: { action: 'unfriend' } }, 'not_friends');
+            this.$dialog.confirm({
+                message: `Are you sure you want to remove ${this.user.firstname} from your friends?`,
+                confirmText: `Unfriend ${this.user.firstname}`,
+                type: 'is-danger',
+                onConfirm: () => {
+                    this.request('delete', `/friendships/${this.user.id}`, { params: { action: 'unfriend' } }, 'not_friends');
+                }
+            });
         },
         request (requestType, url, data, friendship) {
+            this.processing = true;
             this.$http[requestType](url, data)
-                .then((response) => this.$emit('friendship-changed', friendship))
-                .catch((error) => console.log(error.response));
+                .then((response) => {
+                    this.processing = false;
+                    this.$emit('update:friendship', friendship);
+                })
+                .catch((error) => {
+                    this.processing = false;
+                    console.log(error.response);
+                });
         }
     }
 };
