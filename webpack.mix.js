@@ -22,5 +22,9 @@ mix.js('resources/assets/js/app.js', 'public/js')
             alias: {
                 '@': path.resolve('resources/assets/js')
             }
+        },
+        output: {
+            chunkFilename: 'js/[name].js'
         }
-    });
+    })
+    .babelConfig({ plugins: ['syntax-dynamic-import'] });

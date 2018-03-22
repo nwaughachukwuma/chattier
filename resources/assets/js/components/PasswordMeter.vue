@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import zxcvbn from 'zxcvbn';
-
 export default {
     props: {
         password: {
@@ -26,13 +24,18 @@ export default {
             color: ''
         };
     },
+    created () {
+        import('zxcvbn');
+    },
     watch: {
         password (password) {
-            const result = zxcvbn(password);
+            import('zxcvbn').then((zxcvbn) => {
+                const result = zxcvbn(password);
 
-            this.adjustedScore = (password ? result.score + 1 : 0);
-            this.warning = result.feedback.warning;
-            this.color = (result.score <= 2 ? 'danger' : 'success');
+                this.adjustedScore = (password ? result.score + 1 : 0);
+                this.warning = result.feedback.warning;
+                this.color = (result.score <= 2 ? 'danger' : 'success');
+            });
         },
         warning (warning) {
             if (warning !== '' && !warning.endsWith('.')) {
