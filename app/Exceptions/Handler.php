@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($request->ajax()) {
-            $responses = [
+            $responseMap = [
                 ModelNotFoundException::class => ['resource_not_found', 404],
                 UnauthorizedHttpException::class => ['jwt_refresh', 401],
                 JWTException::class => ['jwt_absent', 401],
@@ -63,8 +63,9 @@ class Handler extends ExceptionHandler
                 TokenExpiredException::class => ['jwt_expired', 401],
                 TokenInvalidException::class => ['jwt_invalid', 401],
             ];
-            if (array_key_exists($class = get_class($exception), $responses)) {
-                list($message, $status) = $responses[$class];
+
+            if (array_key_exists($class = get_class($exception), $responseMap)) {
+                [$message, $status] = $responseMap[$class];
                 return response()->json(compact('message'), $status);
             }
         }

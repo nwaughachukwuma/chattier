@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import store from 'store';
+import store2 from 'store2';
 import Buefy from 'buefy';
 import ErrorPage from 'vue-error-page';
 import Meta from 'vue-meta';
@@ -12,19 +12,11 @@ import Route from 'vue-routisan';
 Vue.config.productionTip = false;
 
 window.eventBus = new Vue();
+window.utcOffset = (new Date()).getTimezoneOffset() * 60000;
 
-window.store = store;
-window.store.addPlugin(() => {
-    return {
-        pull (_, key) {
-            const value = this.get(key);
-            this.remove(key);
-            return value;
-        },
-        has (_, key) {
-            return (typeof this.get(key) !== 'undefined');
-        }
-    };
+window.storage = store2;
+window.storage._.fn('pull', function (key) {
+    return this.remove(key);
 });
 
 Vue.use(Buefy, {
@@ -33,13 +25,16 @@ Vue.use(Buefy, {
     defaultNoticeQueue: false,
     defaultTooltipType: 'is-info'
 });
-Vue.use(ErrorPage, { resolver: (component) => require(`./views/Errors/${component}`) });
+Vue.use(ErrorPage, {
+    resolver: (component) => require(`./views/Errors/${component}`)
+});
 Vue.use(Meta);
+
 Vue.mixin(auth);
 Vue.mixin(config);
 
 Flash.setConfig({
-    handler: (message, type) => {
+    handler (message, type) {
         type = `is-${type}`;
         Vue.prototype.$toast.open({ message, type });
     }

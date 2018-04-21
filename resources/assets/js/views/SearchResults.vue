@@ -4,14 +4,12 @@
         <h4 class="subtitle has-text-grey">{{ users.length }} results</h4>
 
         <spinner v-if="loading"/>
-        <div v-else class="columns is-multiline">
-            <template v-if="users.length">
-                <div v-for="user in users" :key="user.id" class="column is-half">
-                    <user-block :user="user"/>
-                </div>
-            </template>
-            <div v-else class="column">No results found, sorry.</div>
+        <div v-else-if="users.length" class="columns is-multiline">
+            <div v-for="user in users" :key="user.id" class="column is-half">
+                <user-block :user="user"/>
+            </div>
         </div>
+        <p v-else>No results found, sorry.</p>
     </div>
 </template>
 

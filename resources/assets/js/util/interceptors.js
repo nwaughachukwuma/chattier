@@ -3,14 +3,13 @@ import axios from 'axios';
 
 const request = [
     (config) => {
-        if (window.store.has('auth.token')) {
-            config.headers.common['Authorization'] = `Bearer ${window.store.get('auth.token')}`;
+        if (window.storage.has('auth.token')) {
+            config.headers.common['Authorization'] = `Bearer ${window.storage.get('auth.token')}`;
         }
+
         return config;
     },
-    (error) => {
-        return Promise.reject(error);
-    }
+    (error) => Promise.reject(error)
 ];
 
 const response = [
@@ -25,21 +24,19 @@ const response = [
         Flash.interceptor(res.data, 'danger');
 
         if (res.data.message === 'jwt_refresh') {
-            return new Promise((resolve, reject) => {
-                axios.get('/refresh')
-                    .then(({ data: { token } }) => {
-                        window.store.set('auth.token', token);
-                        res.config.headers['Authorization'] = `Bearer ${token}`;
-                        resolve(axios(res.config));
-                    })
-                    .catch((error) => {
-                        window.eventBus.$emit('jwt-error', res.config.url);
-                        reject(error);
-                    });
-            });
-        } else {
-            return Promise.reject(error);
+            return axios.get('/refresh')
+                .then(({ data: { token } }) => {
+                    window.storage.set('auth.token', token);
+                    res.config.headers['Authorization'] = `Bearer ${token}`;
+                    return axios(res.config);
+                })
+                .catch((error) => {
+                    window.eventBus.$emit('jwt-error');
+                    return Promise.reject(error);
+                });
         }
+
+        return Promise.reject(error);
     }
 ];
 

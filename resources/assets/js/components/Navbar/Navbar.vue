@@ -5,9 +5,9 @@
                 <router-link to="/" exact active-class class="navbar-item">
                     <strong>{{ $_config.app.name }}</strong>
                 </router-link>
-                <button class="button navbar-burger" :class="{ 'is-active': isActive }" @click="isActive = !isActive">
+                <div class="navbar-burger" :class="{ 'is-active': isActive }" @click="isActive = !isActive">
                     <span/><span/><span/>
-                </button>
+                </div>
             </div><!-- .navbar-brand -->
 
             <div class="navbar-menu" :class="{ 'is-active': isActive }">

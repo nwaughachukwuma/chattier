@@ -12,7 +12,7 @@ class ResetPasswordController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest:api');
+        $this->middleware('guest');
     }
 
     protected function rules()
@@ -29,11 +29,6 @@ class ResetPasswordController extends Controller
         $user->password = $password;
 
         $user->save();
-    }
-
-    protected function guard()
-    {
-        return auth()->guard('api');
     }
 
     protected function sendResetResponse($response)

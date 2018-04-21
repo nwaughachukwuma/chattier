@@ -34,7 +34,7 @@
 
 <script>
 import debounce from 'lodash/debounce';
-import MediaObject from './MediaObject';
+import MediaObject from '@/components/MediaObject';
 import { profile } from '@/util/mixins';
 
 export default {
@@ -56,9 +56,7 @@ export default {
             if (this.trimmedKeyword === '') return;
 
             this.$http.get('/search', { params: { keyword: this.trimmedKeyword, limit: 5 } })
-                .then(({ data }) => {
-                    this.suggestions = data;
-                })
+                .then(({ data }) => (this.suggestions = data))
                 .catch((error) => console.log(error.response));
         }, 800),
         onSelect (user) {

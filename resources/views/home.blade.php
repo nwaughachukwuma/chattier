@@ -4,18 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        @yield('title')
-        {{ !empty($__env->yieldContent('title')) ? ' | ' : '' }}
-        {{ config('app.name') }}
-    </title>
-    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    <title>{{ config('app.name') }}</title>
+    <link rel="icon" href="/favicon.ico">
+
+    {{-- Styles --}}
     <link rel="stylesheet" href="{{ mix('css/theme-light.css') }}" title="theme">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    @include('_init')
 </head>
 <body>
     <div id="app"></div>
+
+    {{-- Scripts --}}
+    <script>window.__CONFIG__ = {!! $config !!};</script>
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

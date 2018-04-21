@@ -12,7 +12,7 @@ class ForgotPasswordController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest:api');
+        $this->middleware('guest');
     }
 
     protected function sendResetLinkResponse($response)

@@ -4,8 +4,10 @@ import App from './components/App';
 import router from './router';
 import store from './store';
 
-new Vue({
-    router,
-    store,
-    render: (h) => h(App)
-}).$mount('#app');
+store.dispatch('fetchAuthUser').then(() => {
+    new Vue({
+        router,
+        store,
+        render: (h) => h(App)
+    }).$mount('#app');
+});

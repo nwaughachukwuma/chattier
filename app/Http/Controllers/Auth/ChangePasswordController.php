@@ -9,7 +9,7 @@ class ChangePasswordController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.auth:api');
+        $this->middleware('jwt.auth');
     }
 
     public function change()

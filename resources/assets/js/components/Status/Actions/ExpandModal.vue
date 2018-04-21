@@ -46,6 +46,7 @@
 import Status from '@/components/Status/Status';
 import StatusForm from '@/components/Status/StatusForm';
 import Spinner from '@/components/Spinner';
+import { removeById } from '@/util/helpers';
 
 export default {
     components: { Status, StatusForm, Spinner },
@@ -85,9 +86,7 @@ export default {
             this.replies.unshift(reply);
         },
         onReplyDeleted (id) {
-            this.replies.splice(this.replies.indexOf(
-                this.replies.find((reply) => reply.id === id)
-            ), 1);
+            removeById(this.replies, id);
         }
     },
     created () {

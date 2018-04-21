@@ -42,7 +42,7 @@ export default {
             this.form.post('/login')
                 .then((response) => {
                     this.$store.dispatch('login', response);
-                    this.$router.push(window.store.pull('url.intended') || '/');
+                    this.$router.push(window.storage.pull('url.intended') || '/');
                 })
                 .catch((error) => console.log(error.response));
         }

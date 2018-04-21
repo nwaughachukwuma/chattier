@@ -33,7 +33,9 @@
         ">
             <h4 class="subtitle">
                 {{ user.firstname }}'s friends
-                <small class="has-text-grey">{{ friends_total }}</small>
+                <small class="has-text-grey">
+                    {{ (friends_total > 6 ? '6 of ' : '') + friends_total }}
+                </small>
             </h4>
 
             <template v-if="friends.length">
@@ -50,6 +52,7 @@ import UserBlock from '@/components/UserBlock';
 import Friendship from '@/components/Friendship';
 import Timeline from '@/components/Status/Timeline';
 import Spinner from '@/components/Spinner';
+import { removeById } from '@/util/helpers';
 
 export default {
     metaInfo () {
@@ -99,9 +102,7 @@ export default {
             const change = `${old} > ${current}`;
             if (change === 'friends > not_friends') {
                 this.friends_total--;
-                this.friends.splice(this.friends.indexOf(
-                    this.friends.find((friend) => friend.id === this.$_auth.id)
-                ), 1);
+                removeById(this.friends, this.$_auth.id);
             } else if (change === 'pending > friends') {
                 this.friends_total++;
                 this.friends.unshift(this.$_auth.user);

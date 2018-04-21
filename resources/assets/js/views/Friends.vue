@@ -1,26 +1,17 @@
 <template>
-    <div class="columns">
-        <div class="column is-6">
-            <h1 class="title">
-                Your friends
-                <small class="has-text-grey">{{ friends.length }}</small>
-            </h1>
+    <div>
+        <b-tabs v-model="tab">
+            <b-tab-item :label="`Your friends (${friends.length})`"/>
+            <b-tab-item label="Friend requests"/>
+        </b-tabs>
 
-            <spinner v-if="loading"/>
-            <template v-else-if="friends.length">
-                <user-block v-for="friend in friends" :user="friend" :key="friend.id"/>
-            </template>
-            <p v-else>You have no friends.</p>
+        <spinner v-if="loading"/>
+        <div v-else-if="users.length" class="columns is-multiline">
+            <div v-for="user in users" :key="user.id" class="column is-half">
+                <user-block :user="user"/>
+            </div>
         </div>
-        <div class="column is-6">
-            <h4 class="subtitle">Friend requests</h4>
-
-            <spinner v-if="loading"/>
-            <template v-else-if="requests.length">
-                <user-block v-for="request in requests" :user="request" :key="request.id"/>
-            </template>
-            <p v-else>You have no friend requests.</p>
-        </div>
+        <p v-else>You have no {{ ['friends', 'friend requests'][tab] }}.</p>
     </div>
 </template>
 
@@ -33,10 +24,16 @@ export default {
     components: { UserBlock, Spinner },
     data () {
         return {
+            tab: 0,
             friends: [],
             requests: [],
             loading: true
         };
+    },
+    computed: {
+        users () {
+            return [this.friends, this.requests][this.tab];
+        }
     },
     created () {
         this.$http.get('/friendships')

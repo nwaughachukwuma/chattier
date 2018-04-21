@@ -1,16 +1,23 @@
 # Chattier Social Network
 
-Chatty social network from Codecourse tutorial rebuilt from scratch as a single-page app using Laravel 5.6 and Vue.js 2.
+Chatty social network from Codecourse tutorial rebuilt from scratch as a single-page app.
+
+- Laravel 5.6
+    - JWT-based authentication with token refreshing
+- Vue.js 2
+- Bulma
+    - Buefy components
+    - Bulmaswatch themes
 
 ## Demo
 
-A live demo of this project can be found [here](https://raniesantos-chattier.herokuapp.com/).
+A live demo of this project can be found [here](https://raniesantos-chattier.herokuapp.com/?ref=github-readme).
 
 ## Setup
 
 - Start your local server. (Laravel Homestead, XAMPP/WAMP/MAMP, etc.)
-- `yarn install` or `npm install` (Yarn recommended)
-- `yarn run dev` or `npm run dev`
+- `yarn install`
+- `yarn dev`
 - `composer install`
 - configure `.env` file based on `.env.example`
 - configure database

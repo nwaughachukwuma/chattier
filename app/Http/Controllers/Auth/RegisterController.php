@@ -9,7 +9,7 @@ class RegisterController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest:api');
+        $this->middleware('guest');
     }
 
     public function register()
@@ -23,7 +23,7 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create($data);
-        $token = auth()->guard('api')->attempt(request()->only(['email', 'password']));
+        $token = auth()->guard()->attempt(request()->only(['email', 'password']));
         $flash = 'Your account has been created.';
 
         return response()->json(compact('token', 'user', 'flash'));

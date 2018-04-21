@@ -6,7 +6,7 @@
             <b-tooltip v-for="{ label, logo, size, site } in row" :key="label" :label="label">
                 <a :href="site" target="_blank">
                     <figure :class="`image is-inline-flex ${size}`">
-                        <img :src="`images/${logo}`">
+                        <img :src="`/images/${logo}`">
                     </figure>
                 </a>
             </b-tooltip>

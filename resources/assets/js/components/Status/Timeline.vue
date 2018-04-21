@@ -32,6 +32,7 @@ import infiniteScroll from 'vue-infinite-scroll';
 import Status from './Status';
 import StatusForm from './StatusForm';
 import Spinner from '@/components/Spinner';
+import { removeById } from '@/util/helpers';
 
 export default {
     components: { Status, StatusForm, Spinner },
@@ -89,9 +90,7 @@ export default {
             this.statuses.unshift(status);
         },
         onStatusDeleted (id) {
-            this.statuses.splice(this.statuses.indexOf(
-                this.statuses.find((status) => status.id === id)
-            ), 1);
+            removeById(this.statuses, id);
         }
     },
     watch: {
