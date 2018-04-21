@@ -28,11 +28,18 @@ export default {
                 Flash.show('Your session has expired, please sign in again.', 'info');
                 this.$router.push('/signin');
             });
+        },
+        storeRef () {
+            const ref = this.$route.query.ref;
+            if (ref) {
+                window.storage.set('url.ref', ref);
+            }
         }
     },
     created () {
         Flash.listener();
         this.jwtErrorListener();
+        this.storeRef();
     }
 };
 </script>

@@ -50,6 +50,8 @@
                         </div>
                     </div>
 
+                    <input type="hidden" v-model="form.ref">
+
                     <b-field>
                         <button class="button is-primary" :class="{ 'is-loading': form.processing }" :disabled="form.errors.any()">
                             Sign up
@@ -76,7 +78,8 @@ export default {
                 'firstname',
                 'lastname',
                 'password',
-                'password_confirmation'
+                'password_confirmation',
+                'ref'
             ])
         };
     },
@@ -88,6 +91,11 @@ export default {
                     this.$router.push('/');
                 })
                 .catch((error) => console.log(error.response));
+        }
+    },
+    created () {
+        if (window.storage.has('url.ref')) {
+            this.form.ref = window.storage.get('url.ref');
         }
     }
 };

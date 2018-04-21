@@ -23,6 +23,7 @@ class User extends Authenticatable implements JWTSubject, LikerContract
         'lastname',
         'password',
         'location',
+        'ref',
     ];
 
     protected $hidden = [
