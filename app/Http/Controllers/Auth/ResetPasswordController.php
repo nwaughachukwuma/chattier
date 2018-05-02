@@ -33,8 +33,8 @@ class ResetPasswordController extends Controller
 
     protected function sendResetResponse($response)
     {
-        $token = $this->guard()->attempt(request()->only(['email', 'password']));
-        $user = $this->guard()->user();
+        $token = auth()->attempt(request()->only(['email', 'password']));
+        $user = auth()->user();
         $flash = trans($response);
 
         return response()->json(compact('token', 'user', 'flash'));

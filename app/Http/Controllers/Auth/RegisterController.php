@@ -23,7 +23,7 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create($data);
-        $token = auth()->guard()->attempt(request()->only(['email', 'password']));
+        $token = auth()->attempt(request()->only(['email', 'password']));
         $flash = 'Your account has been created.';
 
         return response()->json(compact('token', 'user', 'flash'));

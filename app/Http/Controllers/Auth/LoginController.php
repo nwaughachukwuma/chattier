@@ -20,7 +20,7 @@ class LoginController extends Controller
 
     protected function attemptLogin(Request $request)
     {
-        $this->token = $this->guard()->attempt($this->credentials($request));
+        $this->token = auth()->attempt($this->credentials($request));
         return (bool) $this->token;
     }
 
@@ -28,7 +28,7 @@ class LoginController extends Controller
     {
         return response()->json([
             'token' => $this->token,
-            'user' => $this->guard()->user(),
+            'user' => auth()->user(),
             'flash' => 'You are now signed in.',
         ]);
     }
@@ -40,7 +40,7 @@ class LoginController extends Controller
 
     public function logout()
     {
-        $this->guard()->logout();
+        auth()->logout();
         return response()->json(['flash' => 'You have been signed out.']);
     }
 }

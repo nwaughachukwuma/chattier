@@ -14,7 +14,7 @@ class TokenController extends Controller
 
     public function refresh()
     {
-        return response()->json(['token' => auth()->guard()->refresh()]);
+        return response()->json(['token' => auth()->refresh()]);
     }
 
     public function user()
