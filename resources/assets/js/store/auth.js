@@ -5,8 +5,7 @@ export default {
         user: null
     },
     getters: {
-        auth (state) {
-            const user = state.user;
+        auth ({ user }) {
             return {
                 id: (user ? user.id : null),
                 user,
@@ -32,7 +31,12 @@ export default {
         },
         fetchAuthUser ({ commit }) {
             return window.storage.has('auth.token')
-                ? axios.get('/user').then(({ data }) => commit('setUser', data))
+                ? axios.get('/user')
+                    .then(({ data }) => commit('setUser', data))
+                    .catch(() => {
+                        commit('removeToken');
+                        Promise.resolve();
+                    })
                 : Promise.resolve();
         }
     }
