@@ -21,7 +21,7 @@ export default {
             ];
         },
         icon () {
-            return (this.status.liked ? 'thumbs-up' : 'thumbs-o-up');
+            return (this.status.liked ? 'thumb-up' : 'thumb-up-outline');
         },
         canLike () {
             return this.$_auth.check && this.status.of_friend;

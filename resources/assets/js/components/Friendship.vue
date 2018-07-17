@@ -3,18 +3,18 @@
         <template v-if="friendship === 'waiting'">
             <p>Waiting for {{ user.firstname }} {{ user.lastname }} to accept your request.</p>
             <button class="button is-light" :class="{ 'is-loading': processing }" @click="onClickCancel">
-                <b-icon icon="ban" size="is-small"/>
+                <b-icon icon="cancel" size="is-small"/>
                 <span>Cancel request</span>
             </button>
         </template>
 
         <template v-else-if="friendship === 'pending'">
             <button class="button is-success" :class="{ 'is-loading': processing }" @click="onClickAccept">
-                <b-icon icon="user-plus" size="is-small"/>
+                <b-icon icon="account-plus" size="is-small"/>
                 <span>Accept friend request</span>
             </button>
             <button class="button is-light" :class="{ 'is-loading': processing }" @click="onClickDecline">
-                <b-icon icon="ban" size="is-small"/>
+                <b-icon icon="cancel" size="is-small"/>
                 <span>Decline</span>
             </button>
         </template>
@@ -22,14 +22,14 @@
         <template v-else-if="friendship === 'friends'">
             <p>You and {{ user.firstname }} {{ user.lastname }} are friends.</p>
             <button class="button is-danger" :class="{ 'is-loading': processing }" @click="onClickUnfriend">
-                <b-icon icon="user-times" size="is-small"/>
+                <b-icon icon="account-remove" size="is-small"/>
                 <span>Unfriend</span>
             </button>
         </template>
 
         <template v-else-if="friendship === 'not_friends'">
             <button class="button is-primary" :class="{ 'is-loading': processing }" @click="onClickAdd">
-                <b-icon icon="user-plus" size="is-small"/>
+                <b-icon icon="account-plus" size="is-small"/>
                 <span>Add as friend</span>
             </button>
         </template>

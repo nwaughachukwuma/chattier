@@ -24,7 +24,7 @@
 
             <p class="control">
                 <button class="button is-primary">
-                    <b-icon icon="search"/>
+                    <b-icon icon="magnify"/>
                 </button>
             </p>
 

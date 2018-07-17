@@ -20,7 +20,6 @@ window.storage._.fn('pull', function (key) {
 });
 
 Vue.use(Buefy, {
-    defaultIconPack: 'fa',
     defaultToastDuration: 3000,
     defaultNoticeQueue: false,
     defaultTooltipType: 'is-info'

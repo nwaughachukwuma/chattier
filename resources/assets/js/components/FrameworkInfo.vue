@@ -14,8 +14,9 @@
 
         <p>Made by <strong>Ranie Santos</strong></p>
 
-        <a href="https://github.com/raniesantos"><b-icon icon="github"/></a>
-        <a href="https://twitter.com/raniesantos32"><b-icon icon="twitter"/></a>
+        <a href="https://raniesantos.netlify.com" target="_blank"><b-icon icon="web"/></a>
+        <a href="https://github.com/raniesantos" target="_blank"><b-icon icon="github-circle"/></a>
+        <a href="https://twitter.com/raniesantos32" target="_blank"><b-icon icon="twitter"/></a>
     </div>
 </template>
 

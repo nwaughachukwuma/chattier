@@ -17,7 +17,7 @@
                         <b-icon icon="home"/>Timeline
                     </router-link>
                     <router-link to="/friends" class="navbar-item">
-                        <b-icon icon="group"/>Friends
+                        <b-icon icon="account-group"/>Friends
                     </router-link>
                     <div class="navbar-item">
                         <search-form/>
@@ -35,10 +35,10 @@
 
                     <template v-if="$_auth.guest">
                         <router-link to="/signup" class="navbar-item">
-                            <b-icon icon="vcard-o"/>Sign up
+                            <b-icon icon="account-card-details"/>Sign up
                         </router-link>
                         <router-link to="/signin" class="navbar-item">
-                            <b-icon icon="sign-in"/>Sign in
+                            <b-icon icon="login"/>Sign in
                         </router-link>
                     </template>
 
@@ -47,10 +47,10 @@
                         <div class="navbar-dropdown is-right">
                             <template v-if="$_auth.check">
                                 <router-link to="/profile/edit" class="navbar-item">
-                                    <b-icon icon="edit"/>Update profile
+                                    <b-icon icon="account-edit"/>Update profile
                                 </router-link>
                                 <router-link to="/password/change" class="navbar-item">
-                                    <b-icon icon="lock"/>Change password
+                                    <b-icon icon="key-variant"/>Change password
                                 </router-link>
                             </template>
 
@@ -59,7 +59,7 @@
                             <template v-if="$_auth.check">
                                 <hr class="navbar-divider">
                                 <a class="navbar-item" @click="onClickSignout">
-                                    <b-icon icon="sign-out"/>Sign out
+                                    <b-icon icon="logout"/>Sign out
                                 </a>
                             </template>
                         </div><!-- .navbar-dropdown -->

@@ -16,14 +16,14 @@
         <template v-if="actions.length" slot="actions">
             <like v-if="actions.includes('like')" :status="status" @like-toggled="onLikeToggled"/>
             <a v-if="actions.includes('reply')" class="level-item" @click="onClickReply" :disabled="!canReply">
-                <b-icon icon="comment-o" size="is-small"/>
+                <b-icon icon="comment-outline" size="is-small"/>
                 <span>{{ status.replies_count }}</span>
             </a>
             <a v-if="actions.includes('expand')" class="level-item" @click="onClickExpand">
-                <b-icon icon="expand" size="is-small"/>
+                <b-icon icon="arrow-expand" size="is-small"/>
             </a>
             <a v-if="actions.includes('delete') && isMyStatus" class="level-item" @click="onClickDelete">
-                <b-icon icon="trash-o" size="is-small"/>
+                <b-icon icon="delete-outline" size="is-small"/>
             </a>
         </template>
     </media-object>

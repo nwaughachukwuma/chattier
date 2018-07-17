@@ -1,8 +1,8 @@
-// Font Awesome
-@import "node_modules/font-awesome/css/font-awesome.min";
+// Material Design Icons
+@import "node_modules/@mdi/font/css/materialdesignicons.min";
 
-.fa-spin-fast {
-    animation: fa-spin 1s infinite linear;
+.mdi-spin-fast:before {
+    animation: mdi-spin 0.5s infinite linear;
 }
 
 .navbar {

@@ -1,6 +1,6 @@
 <template>
     <a class="navbar-item" @click="nightMode = !nightMode">
-        <b-icon icon="moon-o"/>Night mode: {{ nightMode ? 'On' : 'Off' }}
+        <b-icon icon="weather-night"/>Night mode: {{ nightMode ? 'On' : 'Off' }}
     </a>
 </template>
 
